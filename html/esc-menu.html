@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Menu ESC unificado</title>
+  <link rel="stylesheet" href="esc-menu.css?v=garage-purchase-confirm-1">
+  <link rel="preload" as="image" href="esc-menu-images/profile-driver.webp">
+  <link rel="preload" as="image" href="esc-menu-images/free-racing.webp">
+  <link rel="preload" as="image" href="esc-menu-images/multiplayer-grid.webp">
+  <link rel="preload" as="image" href="esc-menu-images/multiplayer-track.webp">
+  <link rel="preload" as="image" href="esc-menu-images/crew-garage.webp">
+  <link rel="stylesheet" href="esc-menu-redesign.css?v=player-economy-1">
+  <link rel="stylesheet" href="garage-cards.css?v=garage-cards-2">
+</head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 100 6 3 3 0 000-6z"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+<symbol id="globe" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="shk" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM8.5 12l2.5 2.5 4.5-5"/></symbol>
+<symbol id="gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1116 0M12 16l4-5"/></symbol>
+<symbol id="edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/></symbol>
+<symbol id="timer" viewBox="0 0 24 24"><path d="M12 8v5l3 2M9 3h6M12 21a8 8 0 100-16 8 8 0 000 16z"/></symbol>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+<symbol id="ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="swd" viewBox="0 0 24 24"><path d="M4 4l12 12M20 4L8 16M15 17l3 3M9 17l-3 3"/></symbol>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></symbol>
+<symbol id="map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></symbol>
+<symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><path d="M9 11a3 3 0 100-6 3 3 0 000 6zM3 20c0-3 3-5 6-5s6 2 6 5M17 11a2.5 2.5 0 100-5M18 15c2 .5 3 2 3 5"/></symbol>
+<symbol id="cup" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 01-8 0zM8 6H4c0 3 1 4 4 4M16 6h4c0 3-1 4-4 4M12 13v4M8 20h8"/></symbol>
+<symbol id="gear" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><path d="M6 11h12v9H6zM8 11V8a4 4 0 018 0v3"/></symbol>
+<symbol id="car" viewBox="0 0 24 24"><path d="M3 16l2-7h14l2 7v3h-3v-2H6v2H3zM3 16h18M7 13h.01M17 13h.01"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11zM12 12a2 2 0 100-4"/></symbol>
+<symbol id="off" viewBox="0 0 24 24"><path d="M12 3v9M6.5 6.5a8 8 0 1011 0"/></symbol>
+<symbol id="sun" viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></symbol>
+<symbol id="cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5 5 0 019.5-1A4 4 0 0117 18z"/></symbol>
+<symbol id="rain" viewBox="0 0 24 24"><path d="M7 15a4 4 0 010-8 5 5 0 019.5-1A4 4 0 0117 15zM8 19l1-2M12 19l1-2M16 19l1-2"/></symbol>
+<symbol id="storm" viewBox="0 0 24 24"><path d="M7 15a4 4 0 010-8 5 5 0 019.5-1A4 4 0 0117 15zM12 15l-2 3h3l-2 3"/></symbol>
+<symbol id="fog" viewBox="0 0 24 24"><path d="M4 9h16M4 13h16M6 17h12"/></symbol>
+<symbol id="snow" viewBox="0 0 24 24"><path d="M12 3v18M4 7.5l16 9M20 7.5l-16 9"/></symbol>
+<symbol id="person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+<symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h7"/></symbol>
+<symbol id="link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.1 0l3-3A5 5 0 0013 2.9l-1.7 1.7M14 11a5 5 0 00-7.1 0l-3 3a5 5 0 007.1 7.1l1.7-1.7"/></symbol>
+<symbol id="spark" viewBox="0 0 24 24"><path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2zM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"/></symbol>
+</defs></svg>
+<div class="st">
+<svg class="map" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><rect width="1600" height="900" fill="#10131c"/><path d="M0 0H520Q470 140 330 190T0 320Z" fill="#0c1a2c"/><ellipse cx="1150" cy="220" rx="220" ry="110" fill="#0f1f19"/><ellipse cx="380" cy="760" rx="200" ry="90" fill="#0f1f19"/>
+<g stroke="#1c2130" stroke-width="10" fill="none"><path d="M0 300L1600 260M0 800L1600 740M300 0L360 900M900 0L820 900M1300 0L1360 900M0 450L1600 430"/></g>
+<g stroke="#2b3350" stroke-width="18" fill="none"><path d="M0 620L420 560 800 610 1200 520 1600 560"/><path d="M600 0L700 300 860 340"/></g>
+<path class="rt" d="M420 560C520 380 700 330 860 340S1150 380 1200 520S900 720 640 690S380 640 420 560Z"/>
+<circle cx="860" cy="340" r="9" fill="#ff8f9c"/><circle cx="1200" cy="520" r="9" fill="#ff8f9c"/><circle cx="300" cy="380" r="8" fill="#5b8def"/><circle cx="1330" cy="240" r="8" fill="#5b8def"/></svg>
+<div class="dim"></div>
+<div class="ui">
+<div class="top"><div class="logo">APEX<span class="logo-mark">RACING</span></div>
+<div class="tabs"><span class="bd">Q</span><div class="tb on" data-v="home"><svg class="i"><use href="#home"/></svg>Início</div><div class="tb" data-v="corridas"><svg class="i"><use href="#flag"/></svg>Solo</div><div class="tb" data-v="online"><svg class="i"><use href="#globe"/></svg>Multiplayer</div><div class="tb" data-v="customisation"><svg class="i"><use href="#person"/></svg>Customização</div><div class="tb" data-v="crew"><svg class="i"><use href="#users"/></svg>Crew</div><div class="tb" data-v="theatre"><svg class="i"><use href="#eye"/></svg>Theatre</div><span class="bd">E</span></div>
+<button class="pl profile-shortcut" type="button" data-home-action="profile"><span class="profile-shortcut-copy"><b id="menu-player-name">PILOTO</b><small>PERFIL APEX</small><span class="profile-economy"><span class="profile-level">NÍVEL <b id="menu-player-level">1</b></span><span class="profile-money" id="menu-player-money">$ 0</span></span></span><span class="av"><svg class="i"><use href="#person"/></svg></span></button></div>
+
+<div class="v on" id="v-home"><div class="home-dashboard">
+<button class="c p home-feature profile-feature" type="button" data-home-action="profile"><span class="home-eyebrow"><svg class="i"><use href="#person"/></svg> PILOTO / PERFIL</span><span class="home-feature-title">PERFIL</span><span class="home-feature-description">Sua identidade, estatísticas e histórico na Apex Racing.</span><span class="home-feature-action">ABRIR PERFIL <b>↗</b></span><svg class="home-feature-art i"><use href="#person"/></svg></button>
+<button class="c p home-feature free-feature" type="button" data-home-action="free"><span class="home-eyebrow"><svg class="i"><use href="#flag"/></svg> DIRIGIR / EXPLORAR</span><span class="home-feature-title">MODO LIVRE</span><span class="home-feature-description">Volte para as ruas e aproveite o servidor.</span><span class="home-feature-action">CONTINUAR DIRIGINDO <b>↗</b></span><svg class="home-feature-art i"><use href="#car"/></svg></button>
+<button class="c p home-tile" type="button" data-go="mapa"><span class="home-tile-icon"><svg class="i"><use href="#map"/></svg></span><span class="home-tile-title">ABRIR MAPA</span><span class="home-tile-description">Mapa original do GTA</span><span class="home-tile-state">ABRIR <b>↗</b></span></button>
+<button class="c p home-tile" type="button" data-go="garage"><span class="home-tile-icon"><svg class="i"><use href="#car"/></svg></span><span class="home-tile-title">GARAGEM</span><span class="home-tile-description">Trocar de veículo</span><span class="home-tile-state">ABRIR <b>↗</b></span></button>
+<button class="c p home-tile" type="button" data-go="config"><span class="home-tile-icon"><svg class="i"><use href="#gear"/></svg></span><span class="home-tile-title">CONFIGURAÇÕES</span><span class="home-tile-description">HUD, clima e desempenho</span><span class="home-tile-state">AJUSTAR <b>↗</b></span></button>
+<button class="c p home-tile" type="button" data-home-action="championship" aria-disabled="true"><span class="home-tile-icon"><svg class="i"><use href="#cup"/></svg></span><span class="home-tile-title">CAMPEONATO</span><span class="home-tile-description">Temporadas e disputas</span><span class="home-tile-state">EM BREVE</span></button>
+<button class="c p home-tile" type="button" data-home-action="inbox" aria-disabled="true"><span class="home-tile-icon"><svg class="i"><use href="#mail"/></svg></span><span class="home-tile-title">CAIXA DE ENTRADA</span><span class="home-tile-description">Avisos e mensagens</span><span class="home-tile-state">EM BREVE</span></button>
+<button class="c p home-tile" type="button" data-home-action="about" aria-disabled="true"><span class="home-tile-icon"><svg class="i"><use href="#link"/></svg></span><span class="home-tile-title">SOBRE A APEX</span><span class="home-tile-description">Novidades da comunidade</span><span class="home-tile-state">EM BREVE</span></button>
+</div></div>
+
+<div class="v garage-view" id="v-garage">
+  <div class="gx-deco" aria-hidden="true"><i></i><i></i><i></i></div>
+  <header class="garage-topbar">
+    <div class="garage-brand"><b>APEX</b><span>RACING</span></div>
+    <div class="garage-count"><svg class="i"><use href="#car"/></svg><strong id="garage-count">0</strong><small>CARROS</small></div>
+    <div class="garage-player"><span id="garage-current-car">A PÉ</span><strong id="garage-player-name">PILOTO</strong><button class="garage-close" id="garage-close" type="button" title="Fechar menu" aria-label="Fechar menu">×</button></div>
+  </header>
+  <div class="garage-section"><button class="garage-all" id="garage-all" type="button"><svg class="i"><use href="#car"/></svg><b>TODOS OS CARROS</b></button></div>
+  <div class="garage-toolbar">
+    <div class="garage-brands"><span class="gx-pad gx-lb" aria-hidden="true">LB</span><div class="garage-brand-tabs" id="garage-brand-tabs"></div></div>
+    <button class="garage-favorites-filter" id="garage-favorites-filter" type="button" aria-pressed="false"><svg class="i"><use href="#star"/></svg><b>Favoritos</b><span id="garage-favorites-count">0</span></button>
+    <span class="gx-pad gx-rb gx-rb-end" aria-hidden="true">RB</span>
+    <label class="garage-search"><span>⌕</span><input id="garage-search" placeholder="Buscar veículos..." autocomplete="off"></label>
+  </div>
+  <div class="garage-grid-wrap" id="garage-grid-wrap"><div class="garage-grid" id="garage-cards"><div class="garage-empty">Carregando catálogo de veículos...</div></div></div>
+  <footer class="garage-footer">
+    <span><i class="gx-pad gx-lb">LB</i><i class="gx-pad gx-rb">RB</i> MARCAS <small>Q / R</small></span>
+    <span><svg class="gx-dpad" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg> VEÍCULOS <small>SETAS</small></span>
+    <span><i class="gx-pad gx-a">A</i> SELECIONAR <small>ENTER</small></span>
+    <span><kbd class="gx-fav-key">F</kbd> FAVORITAR</span>
+    <button id="garage-back" type="button"><i class="gx-pad gx-b">B</i> VOLTAR <small>ESC</small></button>
+    <button id="garage-close-footer" type="button"><i class="gx-pad gx-menu">≡</i> FECHAR</button>
+  </footer>
+</div>
+
+<div class="v" id="v-corridas"><div class="section-heading"><div><span class="section-kicker">APEX / SOLO</span><h1>DIRIJA NO SEU RITMO</h1><p>Escolha como quer correr e encontre seu próximo desafio.</p></div><span class="section-index">01 <i>/</i> SOLO</span></div><div id="chub" class="hm3 solo-layout"><div class="c p k-ver solo-feature" data-k="ver"><span class="solo-eyebrow">APEX / PISTAS SELECIONADAS</span><span class="solo-feature-index">01 <i>/</i> OFICIAL</span><div class="solo-feature-copy"><div class="ib"><svg class="i"><use href="#shk"/></svg></div><h3>Pistas verificadas</h3><p>Explore circuitos revisados pela equipe e escolha onde quer correr.</p><div class="solo-card-note">CIRCUITOS <b>·</b> SPRINTS <b>·</b> RECORDES</div><span class="btn solo-feature-cta">Explorar pistas <b>↗</b></span></div><svg class="solo-track-art" viewBox="0 0 640 360" aria-hidden="true"><path d="M65 218 111 104 215 82 248 135 372 121 419 72 527 103 551 210 485 267 389 250 339 290 217 271 163 235Z"/><circle cx="111" cy="104" r="7"/><circle cx="419" cy="72" r="7"/></svg></div><div class="col solo-options"><div class="c p rw r1 solo-option solo-time" data-k="tem"><div class="solo-option-icon"><svg class="i"><use href="#timer"/></svg></div><div class="solo-option-copy"><span class="solo-eyebrow">SOLO / CONTRA O RELÓGIO</span><h3>Tomada de tempo</h3><p>Faça voltas solo e registre seu melhor tempo.</p></div><span class="solo-option-arrow">↗</span></div><div class="c p rw r2 solo-option solo-training" data-k="tre"><div class="solo-option-icon"><svg class="i"><use href="#gauge"/></svg></div><div class="solo-option-copy"><span class="solo-eyebrow">PRATIQUE NO SEU RITMO</span><h3>Treino</h3><p>Conheça a pista e prepare seu próximo traçado.</p></div><span class="solo-option-arrow">↗</span></div><div class="c p rw r3 solo-option solo-creator" data-k="cri"><div class="solo-option-icon"><svg class="i"><use href="#edit"/></svg></div><div class="solo-option-copy"><span class="solo-eyebrow">CRIE / TESTE / COMPARTILHE</span><h3>Criador de pistas</h3><p>Desenhe um circuito e coloque sua ideia à prova.</p></div><span class="solo-option-arrow">↗</span></div></div></div>
+<div id="clist" style="display:none;height:100%"><div class="tl"><div class="tlt"><span id="cback" style="cursor:pointer;color:var(--ac);letter-spacing:.1em;font-weight:700;text-transform:uppercase">‹ Voltar  ·  <span id="cht">Pistas</span></span><span id="tf"><span class="pill on">Todas</span><span class="pill">Circuito</span><span class="pill">Sprint</span><span class="pill">Favoritas</span></span><input class="in" id="tq" placeholder="Buscar por nome da pista…"></div>
+<div class="tlb"><div id="tg" class="tgrid"></div>
+<div class="p pad" id="td" style="display:flex;flex-direction:column"><div class="h">Pista selecionada</div><div class="detail-format" id="detailFormat">CIRCUITO / VOLTAS</div><span class="vt"><span class="vb" style="position:static;width:1.6em;height:1.6em"><svg class="i"><use href="#ck"/></svg></span>Verificada pela equipe</span><h3 class="big" id="dn" style="font-size:1.6em"></h3><small id="dc" style="color:var(--mu)"></small>
+<svg viewBox="0 0 300 170" style="width:100%;height:11em;margin:.6em 0"><path id="dp" fill="none" stroke="#ff8f9c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px #ff8f9c)"/></svg>
+<div class="ds"><div><small>Voltas</small><b id="d1"></b></div><div><small>CP</small><b id="d2"></b></div><div><small>Distância</small><b id="d3"></b></div><div><small>Dificuldade</small><div class="dots" id="d4" style="margin-top:.6em"></div></div></div>
+<div class="row" style="cursor:default"><span><small style="color:var(--mu);display:block;letter-spacing:.1em;text-transform:uppercase">Recorde da pista</small><b id="d5" class="big" style="color:var(--ac)"></b></span><small id="d6" style="color:var(--mu)"></small></div>
+<div style="margin-top:auto"><span class="btn" id="drc" style="margin:0 0 .8em;display:block;text-align:center"><svg class="i" style="vertical-align:-.2em;margin-right:.5em"><use href="#cup"/></svg>Ver recordes</span><div style="display:flex;gap:.6em"><span class="bt2"><svg class="i"><use href="#pin"/></svg>Ver rota no mapa</span><span class="bt2" id="dfv"><svg class="i"><use href="#star"/></svg>Favoritar</span></div><span class="bt2" id="ded" style="display:block;text-align:center;margin-top:.6em"><svg class="i"><use href="#gear"/></svg>Editar pista</span></div></div></div></div></div><div id="clist2" style="display:none;height:100%"><div class="tl"><div class="tlt"><span id="cback2" style="cursor:pointer;color:var(--ac);letter-spacing:.1em;font-weight:700;text-transform:uppercase">‹ Voltar  ·  <span id="t2">Treino</span></span><span id="tf2"><span class="pill on">Todas</span><span class="pill">Circuito</span><span class="pill">Sprint</span><span class="pill">Favoritas</span></span><input class="in" id="tq2" placeholder="Pesquisar pistas…"></div>
+<div id="tg2" class="tgrid w5" style="flex:1;min-height:0"></div>
+<div class="p ab"><div class="ab-kicker">PISTA SELECIONADA</div><svg class="ms" viewBox="0 0 300 170"><path id="abp"/></svg><div class="nm" id="abn"></div><small id="abd" style="color:var(--mu)"></small><div class="ab-stats"><div><small>Formato</small><b id="abType">—</b></div><div><small>Voltas</small><b id="abLaps">—</b></div><div><small>Checkpoints</small><b id="abCP">—</b></div><div><small>Distância</small><b id="abDistance">—</b></div></div><span class="nt" id="abt"></span><span class="bt2" id="abm" style="flex:none;padding:.8em 1.4em"><svg class="i"><use href="#pin"/></svg>Ver rota no mapa</span><span class="btn" id="abg" style="margin:0"></span></div></div></div>
+<div class="creator-page" id="creator-page" style="display:none">
+  <header class="creator-page-head"><div><span class="section-kicker">APEX / MINHAS PISTAS</span><h1>CRIADOR DE PISTAS</h1><p>Continue um traçado salvo ou comece uma nova corrida.</p></div><button class="creator-page-back" id="creator-back">‹ VOLTAR</button></header>
+  <div class="creator-page-toolbar"><span class="creator-track-total">SUAS CORRIDAS <b id="creator-track-count">0</b></span><div class="creator-track-filters" id="creator-track-filters"><button class="on" data-format="all">TODAS</button><button data-format="circuit">CIRCUITO</button><button data-format="sprint">SPRINT</button></div><label class="creator-track-search"><span>⌕</span><input id="creator-track-search" type="search" placeholder="Buscar pista..." autocomplete="off"></label><button class="creator-new-track" id="creator-new-track"><b>＋</b> NOVA CORRIDA</button></div>
+  <div class="creator-track-grid" id="creator-track-grid"><div class="creator-tracks-empty"><b>CARREGANDO SUAS PISTAS</b><span>Aguarde um instante.</span></div></div>
+</div>
+</div>
+<div class="v" id="v-crew"><div class="section-heading"><div><span class="section-kicker">APEX / CREW</span><h1>ENCONTRE SUA EQUIPE</h1><p>Explore crews e acompanhe a vida da sua equipe.</p></div><span class="section-index">04 <i>/</i> CREW</span></div><div class="showroom-grid"><article class="showroom-card showroom-feature is-unavailable"><span class="showroom-icon"><svg class="i"><use href="#users"/></svg></span><span class="showroom-state">EM DESENVOLVIMENTO</span><h2>Procurar crew</h2><p>Descubra equipes e encontre pilotos para correr junto.</p></article><article class="showroom-card is-unavailable"><span class="showroom-icon"><svg class="i"><use href="#spark"/></svg></span><span class="showroom-state">EM BREVE</span><h2>Criar crew</h2><p>Monte sua própria equipe e convide outros pilotos.</p></article><article class="showroom-card is-unavailable"><span class="showroom-icon"><svg class="i"><use href="#calendar"/></svg></span><span class="showroom-state">EM BREVE</span><h2>Minha crew</h2><p>Calendário, membros e atividade da equipe.</p></article><article class="showroom-card is-unavailable"><span class="showroom-icon"><svg class="i"><use href="#cup"/></svg></span><span class="showroom-state">EM BREVE</span><h2>Ranking de crews</h2><p>Veja as equipes que estão liderando.</p></article></div></div>
+
+<div class="v" id="v-ranking"><div class="rq">
+<div class="p jr"><div class="jh"><span class="h" style="margin:0">Sua jornada  ·  Temporada 1</span><span class="jd"><b>23</b> dias restantes</span></div><div class="jt" id="jt"></div></div>
+<div class="rb2">
+<div class="p lbp"><div class="rkh"><span class="h" style="margin:0">Classificação</span><span id="rf"><span class="pill on">Pontos</span><span class="pill">Vitórias</span><span class="pill">Corridas</span></span></div><div class="lb lh"><span>#</span><span></span><span>Piloto</span><span>Rank</span><span>Vitórias</span><span>Corr.</span><span>Pts</span></div><div class="rlw" id="rlw"><div id="rl2"></div></div></div>
+<div class="p nbp"><div class="h">Rivais próximos</div><div id="nb"></div><div class="tgt" id="tgt"></div><div class="h" style="margin-top:1.2em">Sua temporada</div><div class="st3"><div><b>96</b><small>corridas</small></div><div><b>32</b><small>vitórias</small></div><div><b>12º</b><small>melhor posição</small></div></div></div>
+</div></div></div>
+
+<div class="v" id="v-online"><div class="section-heading"><div><span class="section-kicker">APEX / MULTIPLAYER</span><h1>ENCONTRE SEU GRID</h1><p>Entre na disputa ou acompanhe sua evolução.</p></div><span class="section-index">02 <i>/</i> MULTIPLAYER</span></div><div id="ohub" class="multiplayer-grid">
+<article class="c p multiplayer-card competitive-card" aria-disabled="true"><span class="multiplayer-icon"><svg class="i"><use href="#cup"/></svg></span><span class="multiplayer-state">EM BREVE</span><h3>Competitivo</h3><p>Corridas ranqueadas para disputar posição e pontos.</p><span class="multiplayer-action">RANKED <b>↗</b></span></article>
+<div class="c p mmh" data-o="mm"><div class="mms"><div><b id="hmq">—</b><small>na fila</small></div></div><div class="ib"><svg class="i"><use href="#swd"/></svg></div><h3>Casual</h3><p>Entre no matchmaking e vote na próxima pista.</p><span class="multiplayer-action">ENTRAR NA FILA <b>↗</b></span></div>
+<article class="c p multiplayer-card championship-card" aria-disabled="true"><span class="multiplayer-icon"><svg class="i"><use href="#flag"/></svg></span><span class="multiplayer-state">EM BREVE</span><h3>Campeonatos</h3><p>Dispute séries de corridas com outros pilotos.</p><span class="multiplayer-action">SÉRIES APEX <b>↗</b></span></article>
+</div>
+<div id="omm" style="display:none;height:100%"><div class="tl"><div class="tlt"><span class="bk" data-b="1">‹ Voltar  ·  Matchmaking</span><span class="onote" id="mp-countdown"><span>VOTAÇÃO ENCERRA EM</span><b id="mv">00:24</b></span></div>
+<div class="mmg">
+<div class="mmc mmc-primary">
+<section class="p pad mp-showcase"><div class="mp-showcase-heading"><div><span class="mp-kicker">MULTIPLAYER</span><h2>SEU CARRO NA DISPUTA</h2></div><div class="mp-showcase-actions"><span class="mp-live-tag"><i></i> VEÍCULO ATUAL</span><button class="mp-change-vehicle" id="mp-change-vehicle" type="button">TROCAR VEÍCULO</button></div></div>
+<div class="mp-showcase-stage" id="mp-vehicle-stage"><div class="mp-stage-grid"></div><div class="mp-stage-light"></div><img id="mp-player-vehicle-image" src="garage-images/vehicle-placeholder.svg" alt="Veículo atual do jogador"><div class="mp-vehicle-copy"><span id="mp-vehicle-brand">SEU VEÍCULO</span><h3 id="mp-vehicle-name">ENTRE EM UM VEÍCULO</h3><p id="mp-vehicle-model">Seu carro atual aparecerá aqui</p></div></div>
+<div class="mp-showcase-foot"><span>PRONTO PARA ENTRAR NO GRID</span><span id="mp-vehicle-status">IMAGEM DO SEU VEÍCULO</span></div></section>
+<section class="p pad mp-voting"><div class="mp-vote-content"><div class="mp-section-heading"><div><div class="h">Vote na pista</div><p>Escolha o próximo desafio da comunidade.</p></div><span class="mp-vote-count"><b id="mp-total-votes">0</b> VOTOS</span></div><div class="vt3" id="vt3"></div></div><div class="mp-phase-screen" id="mp-phase-screen"><span class="mp-phase-mark" aria-hidden="true"><svg class="i"><use href="#flag"/></svg></span><span class="mp-kicker" id="mp-phase-kicker">STATUS DA DISPUTA</span><h2 id="mp-phase-title">CORRIDA INICIADA</h2><p id="mp-phase-copy">A corrida está em andamento. Aguarde o próximo intervalo para entrar na disputa.</p></div></section>
+<span class="btn" id="qbtn">Entrar na fila</span>
+</div>
+<div class="mmc mmc-sidebar">
+<section class="p pad mp-status"><div class="mp-side-heading"><div class="h">Status da sala</div><span class="mp-phase-dot"></span></div><div class="mp-status-clock"><span id="mp-clock-label">VOTAÇÃO ENCERRA EM</span><strong id="mv2">00:24</strong></div><p id="mst">Vote na pista para a corrida começar.</p><div class="mp-status-meta"><span>PARTIDA AUTOMÁTICA</span><b id="mp-phase-label">VOTAÇÃO ABERTA</b></div></section>
+<section class="p pad mp-participants"><div class="h">Pilotos na sala <span class="mp-count-pill" id="mpc">0</span></div><div id="qp"></div></section>
+<section class="p pad mp-chat"><div class="h">Chat da sala</div><div class="mchat" id="mchat"><span>Sem mensagens ainda.</span></div><div class="mp-chat-input"><input class="in" id="mci" placeholder="Escreva para a sala…"><span class="btn" id="mcb">Enviar</span></div></section>
+</div>
+</div></div></div>
+
+<div class="v" id="v-customisation"><div class="section-heading"><div><span class="section-kicker">APEX / CUSTOMIZAÇÃO</span><h1>SUA IDENTIDADE DE PILOTO</h1><p>Personalize a forma como você aparece para a comunidade.</p></div><span class="section-index">03 <i>/</i> CUSTOMIZAÇÃO</span></div><div class="customisation-grid"><button class="c p customisation-card driver-card" type="button" data-home-action="profile"><span class="customisation-visual"><svg class="i"><use href="#person"/></svg></span><span class="customisation-state">PERFIL APEX</span><h2>Piloto</h2><p>Altere seu nome, avatar e identidade do perfil.</p><span class="multiplayer-action">EDITAR PERFIL <b>↗</b></span></button><article class="c p customisation-card badge-card" aria-disabled="true"><span class="customisation-visual"><svg class="i"><use href="#shk"/></svg></span><span class="customisation-state">EM BREVE</span><h2>Insígnia</h2><p>Um distintivo visual para mostrar sua equipe ou conquistas no perfil.</p><span class="multiplayer-action">IDENTIDADE DE CORRIDA</span></article></div></div>
+
+<div class="v" id="v-theatre"><div class="section-heading"><div><span class="section-kicker">APEX / THEATRE</span><h1>REVIVA A CORRIDA</h1><p>Replays, melhores momentos e corridas salvas.</p></div><span class="section-index">05 <i>/</i> THEATRE</span></div><div class="theatre-empty is-unavailable"><span class="theatre-mark"><svg class="i"><use href="#eye"/></svg></span><span class="section-kicker">CENTRO DE REPLAYS</span><h2>EM BREVE</h2><p>Estamos preparando um espaço para rever suas corridas e compartilhar seus melhores momentos.</p></div></div>
+<div id="ohi" style="display:none;height:100%"><div class="tl"><div class="tlt"><span class="bk" data-b="1">‹ Voltar  ·  Histórico</span></div>
+<div class="mmg" style="grid-template-columns:1fr 24em"><div class="p pad" style="overflow-y:auto"><div class="hr hh"><span>Quando</span><span>Pista</span><span>Posição</span><span>Pontos</span><span>Tempo</span></div><div id="hl"></div></div>
+<div class="p pad"><div class="h">Resumo online</div><div class="st3"><div><b>24</b><small>corridas</small></div><div><b>6</b><small>vitórias</small></div><div><b>11</b><small>pódios</small></div></div><div class="h" style="margin-top:1.4em">Pontos na temporada</div><div style="font-family:Orbitron;font-size:2.2em;color:var(--ac)">+142</div><p class="note">Só corridas de matchmaking contam pontos. Treino não salva tempo.</p></div></div></div></div></div>
+
+<div class="v" id="v-admin"><div class="adm">
+<div class="p sub2"><p class="sh" style="padding-top:.2em">Painel admin</p><div class="on" data-a="pl">Jogadores</div><div data-a="cg">Cargos</div><div data-a="rc">Corridas</div><div data-a="sv">Servidor</div><div data-a="vh">Veículos e mundo</div><div data-a="lg">Logs</div></div>
+<div class="p pad">
+<div class="as on" id="a-pl"><div class="h">Jogadores online  ·  8</div><input class="in" id="q" placeholder="Buscar por nome ou ID" style="margin-bottom:1em"><div id="al"></div></div>
+<div class="as" id="a-cg"><div class="h">Cargos</div><div class="g2" style="height:auto;grid-template-columns:1.3fr 1fr"><div id="cgl"></div><div><div class="h">Jogador selecionado</div><h3 class="big" id="cn" style="font-size:1.5em;margin-bottom:1.2em"></h3><div class="h">Cargo</div><div id="cr" style="margin-bottom:1.4em"><span class="pill">Piloto</span><span class="pill on">VIP</span><span class="pill">Moderador</span><span class="pill">Admin</span></div><span class="btn" id="cd">Dar cargo</span><span class="btn g" id="ct">Remover cargo</span><p class="note" id="cm">Selecione um jogador e um cargo.</p></div></div></div>
+<div class="as" id="a-rc"><div class="h">Corridas</div><div id="ar"></div><div class="ag" style="margin:1.2em 0"><div>Criar corrida</div><div>Abrir editor de pistas</div></div><div class="row"><span>Corridas ranqueadas ativas</span><span class="tg on"></span></div><div class="row"><span>Aceitar novos lobbies</span><span class="tg on"></span></div></div>
+<div class="as" id="a-sv"><div class="h">Servidor</div><div class="row"><span>Modo manutenção (só admins entram)</span><span class="tg"></span></div><div class="row"><span>Chat global</span><span class="tg on"></span></div><div class="row"><span>Meeting aberto</span><span class="tg on"></span></div>
+<div class="h" style="margin-top:1.4em">Clima global</div><div class="wx"><div class="on"><svg class="i"><use href="#sun"/></svg></div><div><svg class="i"><use href="#cloud"/></svg></div><div><svg class="i"><use href="#rain"/></svg></div><div><svg class="i"><use href="#storm"/></svg></div><div><svg class="i"><use href="#fog"/></svg></div><div><svg class="i"><use href="#snow"/></svg></div></div>
+<div class="h" style="margin-top:1.4em">Horário global <b id="ah" style="color:var(--ac);margin-left:.8em">18:00</b></div><div class="sky"></div><input type="range" min="0" max="23" value="18" id="as">
+<div class="ag" style="margin-top:1.4em"><div>Anúncio global</div><div>Reiniciar eventos</div></div></div>
+<div class="as" id="a-vh"><div class="h">Veículos e mundo</div><div class="ag"><div>Limpar veículos</div><div>Reparar todos</div><div>Reabastecer todos</div><div class="dg">Remover props</div></div>
+<div class="h" style="margin-top:1.6em">Spawnar veículo</div><div style="display:flex;gap:.8em"><input class="in" placeholder="Modelo, por exemplo: sultan"><span class="btn" style="margin:0;white-space:nowrap">Spawnar</span></div>
+<div class="h" style="margin-top:1.6em">Teleportar para coordenadas</div><div style="display:flex;gap:.8em"><input class="in" placeholder="x, y, z"><span class="btn" style="margin:0">Ir</span></div></div>
+<div class="as" id="a-lg"><div class="h">Logs recentes</div><div id="lgl"></div></div>
+</div></div></div>
+
+<div class="v" id="v-config"><div class="cfg">
+<div class="cfg-head"><div class="cfg-title-row"><button class="cfg-back" data-go="home" type="button"><span class="cfg-back-key"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 3.5v4a2.5 2.5 0 0 1-2.5 2.5H4m0 0 3-3m-3 3 3 3"/></svg></span> VOLTAR</button><h2>CONFIGURAÇÕES</h2><button class="cfg-gta" id="gtShortcut" type="button">CONFIGURAÇÃO DO GTA <span>↗</span></button></div>
+<nav class="sub cfg-tabs" aria-label="Categorias de configuração"><span class="cfg-tab-key" aria-hidden="true">Q</span><div class="on" data-c="gen">GERAL</div><div data-c="int">INTERFACE</div><div data-c="cor">CORRIDA</div><span class="cfg-tab-key" aria-hidden="true">R</span></nav></div>
+<div class="cfg-layout"><div class="p pad config-options" id="cc"><div class="cs on" id="c-gen"><div class="h">Geral</div>
+<div class="row"><span>Idioma</span><span><select class="config-select" aria-label="Idioma"><option selected>Português</option><option>English</option><option>Español</option></select></span></div>
+<div class="row"><span>Modo de desempenho</span><span class="tg"></span></div>
+<div class="row"><span>Compartilhar detalhes da atividade</span><span class="tg on"></span></div>
+<div class="h environment-section-title">Ambiente do jogador</div>
+<div class="row"><span>Horário local</span><span class="sv environment-time"><b id="hr">18:00</b><input id="hs" type="range" min="0" max="1439" step="15" value="1080" aria-label="Horário local"></span></div>
+<div class="environment-weather-label">CLIMA LOCAL</div>
+<div class="wx environment-weather" id="player-weather">
+  <div class="on" data-weather="clear" role="button" tabindex="0" aria-label="Limpo"><svg class="i"><use href="#sun"/></svg><small>Limpo</small></div>
+  <div data-weather="cloudy" role="button" tabindex="0" aria-label="Nublado"><svg class="i"><use href="#cloud"/></svg><small>Nublado</small></div>
+  <div data-weather="rain" role="button" tabindex="0" aria-label="Chuva"><svg class="i"><use href="#rain"/></svg><small>Chuva</small></div>
+  <div data-weather="storm" role="button" tabindex="0" aria-label="Tempestade"><svg class="i"><use href="#storm"/></svg><small>Tempestade</small></div>
+  <div data-weather="fog" role="button" tabindex="0" aria-label="Neblina"><svg class="i"><use href="#fog"/></svg><small>Neblina</small></div>
+  <div data-weather="snow" role="button" tabindex="0" aria-label="Neve"><svg class="i"><use href="#snow"/></svg><small>Neve</small></div>
+</div>
+<div class="row environment-reset" id="envReset" role="button" tabindex="0"><span>Restaurar ambiente do servidor</span><span class="environment-reset-action">RESTAURAR</span></div>
+</div>
+<div class="cs" id="c-int"><div class="h">Interface</div>
+<div class="row"><span>Botões do controle</span><span><span class="pill on">PlayStation</span><span class="pill">Xbox</span></span></div>
+<div class="row"><span>Unidade de velocidade</span><span><span class="pill on">KM/H</span><span class="pill">MPH</span></span></div>
+<div class="row"><span>Modelo do velocímetro</span><span><span class="pill on">Lâminas</span><span class="pill">Digital</span></span></div>
+<div class="row"><span>Formato do minimapa</span><span><span class="pill on">Círculo</span><span class="pill">Quadrado</span></span></div>
+<div class="row"><span>Desfoque do minimapa</span><span class="tg on"></span></div>
+<div class="row"><span>Mostrar minimapa</span><span class="tg on"></span></div>
+<div class="row"><span>Mostrar driver tags (nome e foto dos pilotos)</span><span class="tg on"></span></div>
+<div class="row"><span>Volume da interface</span><span class="sv"><b>5</b><input type="range" min="0" max="10" step="1" value="5" data-f=""></span></div>
+</div>
+<div class="cs" id="c-cor"><div class="h">Corrida</div>
+<div class="row"><span>Linha de corrida</span><span><span class="pill on">Completa</span><span class="pill">Parcial</span><span class="pill">Desativada</span></span></div>
+<div class="row"><span>Delta de checkpoint</span><span><span class="pill on">Popup</span><span class="pill">Tempo</span><span class="pill">Desativado</span></span></div>
+<div class="row"><span>Checkpoints à frente</span><span class="sv"><b>3</b><input type="range" min="1" max="10" step="1" value="3" data-f=""></span></div>
+<div class="row"><span>Cor dos checkpoints</span><span><span class="pill on">Branco</span><span class="pill">Salmão</span><span class="pill">Amarelo</span></span></div>
+<div class="row"><span>Som de checkpoint</span><span class="tg on"></span></div>
+<div class="row"><span>Correr contra o ghost</span><span class="tg on"></span></div>
+</div>
+<div class="gt" id="gt" hidden></div><p class="note" id="gn" hidden></p>
+</div>
+<aside class="p config-detail" id="configDetail"><span class="config-detail-kicker" id="configDetailKicker">HUD</span><h2 id="configDetailTitle">VELOCÍMETRO</h2><p id="configDetailText">Personalize os elementos do HUD exibidos durante o jogo.</p><div class="config-detail-divider"></div><div class="config-detail-caption">OPÇÃO SELECIONADA</div><strong id="configDetailSelection">Velocímetro</strong><p class="config-detail-hint" id="configDetailHint">Ative ou desative este elemento usando o controle à esquerda.</p></aside></div>
+</div>
+</div>
+
+<div class="map-confirm" id="mapConfirm" aria-hidden="true">
+  <div class="map-confirm-card">
+    <div class="map-confirm-icon"><svg class="i"><use href="#map"/></svg></div>
+    <div class="h">Mapa</div>
+    <h3>Abrir mapa do jogo?</h3>
+    <p>O menu APEX será fechado e o mapa original do GTA será aberto em tela inteira. Você poderá navegar, dar zoom e marcar qualquer destino.</p>
+    <div class="map-confirm-actions">
+      <button class="btn" id="mapConfirmYes" type="button">Abrir mapa</button>
+      <button class="btn g" id="mapConfirmNo" type="button">Cancelar</button>
+    </div>
+    <div class="confirm-hints"><span><kbd class="ft-key">←</kbd><kbd class="ft-key">→</kbd> ESCOLHER</span><span><kbd class="ft-key">ENTER</kbd> CONFIRMAR</span><span><kbd class="ft-key">ESC</kbd> CANCELAR</span></div>
+  </div>
+</div>
+<div class="vehicle-confirm" id="garageConfirm" aria-hidden="true">
+  <div class="vehicle-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="garageConfirmTitle">
+    <div class="vehicle-confirm-content">
+      <div class="vehicle-confirm-copy">
+        <div class="vehicle-confirm-icon"><svg class="i"><use href="#car"/></svg></div>
+        <div class="vehicle-confirm-kicker">GARAGEM <span>/</span> TROCA DE VEÍCULO</div>
+        <h3 id="garageConfirmTitle">Confirmar troca de veículo?</h3>
+        <p>Seu veículo atual será substituído pelo veículo selecionado.</p>
+      </div>
+      <div class="vehicle-confirm-compare">
+        <div><small>VEÍCULO ATUAL</small><strong id="garageConfirmCurrent">A PÉ</strong></div>
+        <span class="vehicle-confirm-swap" aria-hidden="true">→</span>
+        <div><small>VEÍCULO SELECIONADO</small><strong id="garageConfirmNext">—</strong></div>
+      </div>
+    </div>
+    <div class="vehicle-confirm-actions">
+      <button class="vehicle-confirm-cancel" id="garageConfirmCancel" type="button">CANCELAR</button>
+      <button class="vehicle-confirm-accept" id="garageConfirmAccept" type="button">CONFIRMAR</button>
+    </div>
+    <div class="confirm-hints"><span><kbd class="ft-key">←</kbd><kbd class="ft-key">→</kbd> ESCOLHER</span><span><kbd class="ft-key">ENTER</kbd> CONFIRMAR</span><span><kbd class="ft-key">ESC</kbd> CANCELAR</span></div>
+  </div>
+</div>
+<div class="toast" id="ts"></div>
+<div class="ft"><div class="ft-default"><span class="ft-hint"><span class="ft-key ft-arrow-key">←</span><span class="ft-key ft-arrow-key">→</span><span class="ft-pad-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Navegar</span><span class="ft-hint"><span class="ft-key">↵</span>Selecionar</span><span class="ft-hint ft-close-hint"><span class="ft-key">ESC</span>Fechar menu</span></div><div class="config-ft"><span class="ft-hint"><span class="ft-pad-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Navegar</span><span class="ft-hint"><span class="ft-pad-icon adjust" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Ajustar</span><span class="ft-hint"><span class="ft-key">↵</span>Alterar</span><span class="ft-hint"><span class="ft-key">←</span>Voltar</span><span class="ft-hint ft-config-escape"><span class="ft-key">ESC</span>Voltar</span><span class="ft-hint ft-gta-hint"><span class="ft-key">DEL</span>Configuração do GTA</span></div></div>
+</div></div>
+  <script src="esc-menu.js?v=garage-cards-2"></script>
+</body></html>

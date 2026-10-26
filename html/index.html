@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex NUI</title>
+    <link rel="stylesheet" href="style.css?v=apex-garage-site-5">
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Oswald:wght@500;700&family=Roboto+Condensed:wght@300;400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div id="world-interaction-dot" aria-hidden="true"></div>
+    <div id="world-interaction-prompt" aria-hidden="true"><span class="world-interaction-key"></span><span class="world-interaction-label"></span></div>
+    <div id="race-menu-hint" class="race-menu-hint">
+        <div class="race-menu-hint-row">
+            <span class="hud-exit-key race-menu-hint-key">ESC</span>
+            <span class="hud-exit-text race-menu-hint-text">MENU</span>
+        </div>
+        <div class="race-menu-hint-row">
+            <span class="hud-exit-key race-menu-hint-key">Z</span>
+            <span class="hud-exit-text race-menu-hint-text">ATALHOS</span>
+        </div>
+    </div>
+
+    <section id="vehicle-quick-menu" class="vehicle-quick-menu" aria-label="Atalhos do veículo" aria-hidden="true">
+        <div class="vehicle-quick-menu-panel">
+            <header class="vehicle-quick-menu-header">
+                <strong id="vehicle-quick-menu-name">VEÍCULO</strong>
+            </header>
+            <div class="vehicle-quick-menu-actions">
+                <button class="vehicle-quick-action" type="button" data-vehicle-action="engine">
+                    <span class="vehicle-quick-number">1</span>
+                    <span class="vehicle-quick-icon"><i class="fa-solid fa-power-off" aria-hidden="true"></i></span>
+                    <span class="vehicle-quick-label">LIGAR VEÍCULO</span>
+                    <span class="vehicle-quick-status" data-vehicle-status="engine"></span>
+                </button>
+                <button class="vehicle-quick-action" type="button" data-vehicle-action="hazards">
+                    <span class="vehicle-quick-number">2</span>
+                    <span class="vehicle-quick-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span>
+                    <span class="vehicle-quick-label">PISCA ALERTA</span>
+                    <span class="vehicle-quick-status" data-vehicle-status="hazards"></span>
+                </button>
+                <button class="vehicle-quick-action" type="button" data-vehicle-action="doors">
+                    <span class="vehicle-quick-number">3</span>
+                    <span class="vehicle-quick-icon"><i class="fa-solid fa-car-side" aria-hidden="true"></i></span>
+                    <span class="vehicle-quick-label">PORTAS</span>
+                    <span class="vehicle-quick-status" data-vehicle-status="doors"></span>
+                </button>
+                <button class="vehicle-quick-action" type="button" data-vehicle-action="repair">
+                    <span class="vehicle-quick-number">4</span>
+                    <span class="vehicle-quick-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                    <span class="vehicle-quick-label">REPARAR VEÍCULO</span>
+                    <span class="vehicle-quick-status" data-vehicle-status="repair"></span>
+                </button>
+            </div>
+            <footer class="vehicle-quick-menu-footer">
+                <button id="vehicle-quick-menu-close" class="vehicle-quick-close" type="button">
+                    <kbd>Z</kbd><span>FECHAR</span>
+                </button>
+            </footer>
+        </div>
+    </section>
+
+    <div id="speedometer" class="speedometer is-hidden" aria-label="Velocidade">
+        <div class="speedometer-shell">
+            <div class="speedometer-readout">
+                <div class="speedometer-meta-row">
+                    <div class="speedometer-rpm-block" aria-label="Conta giros">
+                        <div class="speedometer-rpm-header">
+                            <div class="speedometer-gear" aria-label="Marcha">
+                                <span id="speedometer-gear-value" class="speedometer-gear-value">N</span>
+                            </div>
+                            <span class="speedometer-rpm-label">RPM</span>
+                        </div>
+                        <div class="speedometer-rpm-track" id="speedometer-rpm-track">
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                            <span class="speedometer-rpm-segment" data-rpm-segment></span>
+                        </div>
+                    </div>
+                    <span id="speedometer-unit" class="speedometer-unit">KM/H</span>
+                </div>
+
+                <div class="speedometer-main-row">
+                    <div class="speedometer-digits" aria-hidden="true">
+                        <span class="speedometer-digit is-muted" data-speed-digit>0</span>
+                        <span class="speedometer-digit is-muted" data-speed-digit>0</span>
+                        <span class="speedometer-digit is-muted" data-speed-digit>0</span>
+                    </div>
+
+                    <div class="speedometer-status" aria-label="Assistencias do carro">
+                        <span id="speedometer-abs" class="speedometer-flag abs">ABS</span>
+                        <span id="speedometer-hbk" class="speedometer-flag hbk">HBK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Velocímetro SVG: aro, conta-giros (rosa/vermelho) e números desenhados em um único SVG,
+         todos compartilhando o mesmo centro e raio — evita o desalinhamento/"estouro" do arco
+         vermelho que acontecia quando cada pedaço era uma imagem posicionada por % separadamente. -->
+    <div id="svg-speedometer" class="svg-speedometer is-hidden" aria-label="Velocímetro">
+        <div class="svg-speedometer-art">
+            <svg class="svg-gauge-art" viewBox="0 0 400 372" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                    <linearGradient id="gaugePinkGradient" x1="113.96" y1="317.87" x2="48.20" y2="105.94" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#FFB8B8"/>
+                        <stop offset="1" stop-color="#FF5C5C"/>
+                    </linearGradient>
+                    <!-- Recorte em "fatia" que cresce com o RPM (atualizado pelo JS) -->
+                    <clipPath id="gaugeRpmClip" clipPathUnits="userSpaceOnUse">
+                        <path id="gauge-rpm-clip-path" d=""/>
+                    </clipPath>
+                    <filter id="gaugeOuterShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+                    </filter>
+                </defs>
+
+                <!-- Fundo translúcido sutil atrás do velocímetro (opacidade ajustável no CSS: .gauge-backplate) -->
+                <circle class="gauge-backplate" cx="200" cy="195" r="187"/>
+
+                <!-- Aro externo -->
+                <path class="gauge-outer-ring" d="M 93.31,347.36 A 186.00 186.00 0 1 1 306.69,347.36"/>
+
+                <!-- Conta-giros progressivo: trilho apagado (sempre visivel) + camada colorida
+                     recortada por uma fatia que acompanha o RPM (0-6 rosa, 6-10 redline). -->
+                <path class="gauge-band gauge-track gauge-track-pink" d="M 99.05,339.17 A 176.00 176.00 0 0 1 276.60,36.54 L 265.28,59.95 A 150.00 150.00 0 0 0 113.96,317.87 Z"/>
+                <path class="gauge-band gauge-track gauge-track-red" d="M 293.79,46.07 A 176.00 176.00 0 0 1 300.95,339.17 L 286.04,317.87 A 150.00 150.00 0 0 0 279.93,68.07 Z"/>
+                <g class="gauge-lit" clip-path="url(#gaugeRpmClip)">
+                    <path class="gauge-band gauge-band-pink" d="M 99.05,339.17 A 176.00 176.00 0 0 1 276.60,36.54 L 265.28,59.95 A 150.00 150.00 0 0 0 113.96,317.87 Z" fill="url(#gaugePinkGradient)"/>
+                    <path class="gauge-band gauge-band-red" d="M 293.79,46.07 A 176.00 176.00 0 0 1 300.95,339.17 L 286.04,317.87 A 150.00 150.00 0 0 0 279.93,68.07 Z" fill="#FF5656" fill-opacity="1"/>
+                </g>
+
+                <!-- Aro interno decorativo -->
+                <circle class="gauge-inner-ring" cx="200" cy="195" r="108"/>
+
+                <!-- Números do conta-giros (0 a 10), na mesma escala do aro -->
+                <g class="gauge-numbers">
+                    <text x="127.16" y="299.03" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">0</text>
+                    <text x="85.85" y="250.67" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">1</text>
+                    <text x="73.17" y="188.35" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">2</text>
+                    <text x="92.30" y="127.70" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">3</text>
+                    <text x="138.43" y="83.92" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">4</text>
+                    <text x="200.00" y="68.00" class="gauge-num num-pink" text-anchor="middle" dominant-baseline="central">5</text>
+                    <text x="261.57" y="83.92" class="gauge-num num-neutral" text-anchor="middle" dominant-baseline="central">6</text>
+                    <text x="307.70" y="127.70" class="gauge-num num-red" text-anchor="middle" dominant-baseline="central">7</text>
+                    <text x="326.83" y="188.35" class="gauge-num num-red" text-anchor="middle" dominant-baseline="central">8</text>
+                    <text x="314.15" y="250.67" class="gauge-num num-red" text-anchor="middle" dominant-baseline="central">9</text>
+                    <text x="272.84" y="299.03" class="gauge-num num-red" text-anchor="middle" dominant-baseline="central">10</text>
+                </g>
+            </svg>
+
+            <div class="svg-speed-content">
+                <span id="svg-speed-value" class="svg-speed-value">0</span>
+                <span id="svg-speed-unit" class="svg-speed-unit">mph</span>
+
+                <div class="svg-divider"></div>
+
+                <div class="svg-gear-row">
+                    <span class="svg-speed-gear-label">GEAR</span>
+                    <span id="svg-gear-value" class="svg-gear-value">N</span>
+                </div>
+
+                <div class="svg-rpm-block">
+                    <span class="svg-speed-rpm-label">RPM</span>
+                    <div id="svg-rpm-dots" class="svg-rpm-dots"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="esc-menu" class="esc-menu" aria-hidden="true">
+        <div class="esc-menu-backdrop"></div>
+        <div class="scanlines"></div>
+
+        <header class="esc-topbar">
+            <div class="esc-brand-chip">
+                <span class="esc-brand-accent">//</span>
+                <span class="esc-brand-text">APEX</span>
+            </div>
+        </header>
+
+        <div class="esc-menu-shell">
+            <aside class="esc-sidebar">
+                <nav id="esc-menu-nav" class="esc-menu-nav" aria-label="Menu lateral"></nav>
+
+
+                <div class="esc-menu-footer-hints">
+                    <span><kbd>W</kbd><kbd>S</kbd> navegar</span>
+                    <span><kbd>ENTER</kbd> abrir</span>
+                    <span><kbd>ESC</kbd> fechar</span>
+                </div>
+            </aside>
+
+            <section id="esc-profile-panel" class="esc-profile-panel" aria-hidden="true">
+                <div class="esc-profile-wordmark">RUSH</div>
+
+                <div class="esc-profile-layout">
+                    <aside class="esc-profile-side">
+                        <article class="esc-profile-identity-card">
+                            <div class="esc-profile-cover">
+                                <div class="esc-profile-cover-copy">
+                                    <span class="esc-profile-cover-kicker">Apex Profile</span>
+                                    <strong class="esc-profile-cover-title">PILOTO</strong>
+                                </div>
+
+                                <div class="esc-profile-cover-actions">
+                                    <button id="esc-profile-refresh-button" type="button" class="esc-profile-action-button is-secondary">Atualizar</button>
+                                    <button id="esc-profile-edit-button" type="button" class="esc-profile-action-button">Editar Perfil</button>
+                                </div>
+                            </div>
+
+                            <div class="esc-profile-avatar-row">
+                                <div class="esc-profile-avatar-shell">
+                                    <img id="esc-profile-avatar-image" class="esc-profile-avatar-image" alt="Avatar do perfil">
+                                    <span id="esc-profile-avatar-fallback" class="esc-profile-avatar-fallback">AP</span>
+                                </div>
+
+                                <div class="esc-profile-identity-copy">
+                                    <strong id="esc-profile-display-name" class="esc-profile-display-name">PILOTO</strong>
+                                    <span id="esc-profile-subline" class="esc-profile-subline">Perfil Apex Racing</span>
+                                </div>
+                            </div>
+
+                            <div class="esc-profile-rank-card">
+                                <span class="esc-profile-card-kicker">Rank</span>
+                                <strong id="esc-profile-rank-value" class="esc-profile-rank-value">EM BREVE</strong>
+                                <span id="esc-profile-rank-subtext" class="esc-profile-rank-subtext">Sistema de niveis ainda nao integrado.</span>
+                                <span class="esc-profile-rank-mark">X</span>
+                            </div>
+
+                            <div class="esc-profile-links">
+                                <span class="esc-profile-links-label">Links</span>
+                                <span id="esc-profile-link-chip" class="esc-profile-link-chip">@piloto</span>
+                            </div>
+                        </article>
+                    </aside>
+
+                    <div class="esc-profile-content">
+                        <div class="esc-profile-stat-grid">
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Pistas Com Record</span>
+                                <strong id="esc-profile-stat-records" class="esc-profile-card-value">---</strong>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Rank Maximo</span>
+                                <strong id="esc-profile-rank-max" class="esc-profile-card-value">--- MMR</strong>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Winrate</span>
+                                <strong id="esc-profile-stat-winrate" class="esc-profile-card-value">---%</strong>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Vitorias</span>
+                                <strong id="esc-profile-stat-wins" class="esc-profile-card-value">---</strong>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Corridas MP</span>
+                                <strong id="esc-profile-stat-races" class="esc-profile-card-value">---</strong>
+                                <span id="esc-profile-stat-races-meta" class="esc-profile-card-meta">Participacoes registradas em lobbys.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card is-featured">
+                                <span class="esc-profile-card-kicker">Carro Favorito</span>
+                                <strong id="esc-profile-favorite-car-name" class="esc-profile-feature-title">Sem dados</strong>
+                                <span id="esc-profile-favorite-car-meta" class="esc-profile-feature-meta">Sem historico suficiente ainda.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Melhor Tempo</span>
+                                <strong id="esc-profile-best-time" class="esc-profile-card-value">--:--.--</strong>
+                                <span id="esc-profile-best-time-meta" class="esc-profile-card-meta">Sem recorde registrado.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Pista Favorita</span>
+                                <strong id="esc-profile-best-track" class="esc-profile-card-value is-text">---</strong>
+                                <span id="esc-profile-best-track-meta" class="esc-profile-card-meta">Melhor pista do piloto.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Ultima Corrida</span>
+                                <strong id="esc-profile-last-race" class="esc-profile-card-value is-text">---</strong>
+                                <span id="esc-profile-last-race-meta" class="esc-profile-card-meta">Sem corrida recente.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Level Maximo</span>
+                                <strong id="esc-profile-level-max" class="esc-profile-card-value">---</strong>
+                                <span id="esc-profile-level-max-meta" class="esc-profile-card-meta">Progressao ainda nao sincronizada.</span>
+                            </article>
+
+                            <article class="esc-profile-stat-card">
+                                <span class="esc-profile-card-kicker">Melhor Volta</span>
+                                <strong id="esc-profile-best-lap" class="esc-profile-card-value">---</strong>
+                                <span id="esc-profile-best-lap-meta" class="esc-profile-card-meta">Referencia da ultima corrida.</span>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="esc-profile-empty-state" class="esc-profile-empty-state">
+                    <span id="esc-profile-empty-kicker" class="esc-profile-empty-kicker">Perfil</span>
+                    <strong id="esc-profile-empty-title" class="esc-profile-empty-title">CARREGANDO</strong>
+                    <p id="esc-profile-empty-text" class="esc-profile-empty-text">Buscando estatisticas do piloto.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <!-- Novo menu ESC baseado no menu-esc.html -->
+    <div id="apex-new-esc" class="apex-new-esc" aria-hidden="true">
+        <iframe
+            id="apex-new-esc-frame"
+            class="apex-new-esc-frame"
+            src="esc-menu.html?v=8"
+            title="Menu ESC APEX"
+            tabindex="0"
+        ></iframe>
+    </div>
+
+    <div id="apex-garage-site" class="apex-garage-site" aria-hidden="true">
+        <div class="apex-garage-site-backdrop"></div>
+        <main class="apex-garage-site-shell" role="dialog" aria-modal="true" aria-label="Apex Garage Properties">
+            <header class="apex-garage-site-header">
+                <div class="apex-garage-site-brand"><span class="apex-site-mark">A</span><span><b>APEX</b><small>GARAGE PROPERTIES</small></span></div>
+                <nav class="apex-garage-site-nav" aria-label="Seções da garagem"><button id="apex-site-tab-primary" type="button" class="is-active">MINHA GARAGEM</button><button id="apex-site-tab-listings" type="button">GARAGENS À VENDA</button></nav>
+                <button id="apex-garage-site-close" class="apex-garage-site-close" type="button" aria-label="Fechar">×</button>
+            </header>
+            <section class="apex-garage-site-intro">
+                <div><small>APEX GARAGE · EXPERIÊNCIA EXCLUSIVA</small><h2 id="apex-site-heading">Sua garagem, do seu jeito.</h2><p id="apex-site-subheading">Consulte seus veículos ou conheça garagens 6 vagas disponíveis.</p></div>
+                <div class="apex-site-count"><strong id="apex-garage-site-count">02</strong><span>VAGAS<br>ATUAIS</span></div>
+            </section>
+            <section class="apex-garage-site-workspace">
+                <div class="apex-garage-photo-column">
+                    <div class="apex-garage-photo" role="group" aria-label="Fotos da garagem Apex">
+                        <img class="apex-garage-photo-image" src="garage-images/garage-property-preview.jpg" alt="Interior da garagem Apex">
+                        <div class="apex-garage-photo-scene"><div class="apex-garage-photo-ceiling"></div><div class="apex-garage-photo-windows"></div><div class="apex-garage-photo-lights"><i></i><i></i><i></i></div><div class="apex-garage-photo-bays"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="apex-garage-photo-floor"></div><div class="apex-garage-photo-car"><span></span></div></div>
+                        <div class="apex-garage-photo-shade"></div><div class="apex-garage-photo-label"><small>APEX GARAGE · TOUR EXCLUSIVO</small><b id="apex-site-photo-title">SUA GARAGEM</b><span id="apex-site-photo-address">ENDEREÇO FIXO DO SEU PERFIL</span></div>
+                        <div class="apex-garage-photo-counter"><i class="fa-solid fa-warehouse"></i><span id="apex-site-photo-capacity">02 VAGAS</span></div>
+                        <div class="apex-site-photo-switch" role="group" aria-label="Fotos da garagem"><button type="button" data-garage-photo="exterior" class="is-active">FACHADA</button><button type="button" data-garage-photo="interior">INTERIOR</button></div>
+                    </div>
+                    <div class="apex-site-plan-strip"><div><small>LOCAL</small><b id="apex-site-current-capacity">NOVA GARAGEM</b></div><i class="fa-solid fa-arrow-right"></i><div class="is-next"><small>CAPACIDADE</small><b id="apex-site-next-capacity">06 VAGAS</b></div><span class="apex-site-plan-price" id="apex-site-plan-price">$50.000</span></div>
+                </div>
+                <aside class="apex-garage-site-detail">
+                    <div class="apex-site-detail-kicker"><span id="apex-site-property-tag">EVOLUÇÃO APEX</span><span id="apex-site-property-number">PLANO 01</span></div>
+                    <div class="apex-site-property-icon"><i class="fa-solid fa-warehouse"></i></div>
+                    <small id="apex-site-property-area">LOCALIZAÇÃO ATUAL · NÃO SERÁ ALTERADA</small>
+                    <h3 id="apex-site-property-name">Expanda sua garagem</h3>
+                    <p id="apex-site-property-copy">Mais espaço para guardar seus veículos, no mesmo endereço de sempre.</p>
+                    <div class="apex-site-property-facts"><div><small id="apex-site-capacity-label">CAPACIDADE DO LOCAL</small><b id="apex-site-capacity">06 VAGAS</b></div><div><small id="apex-site-price-label">VALOR DA GARAGEM</small><b id="apex-site-price">$50.000</b></div></div>
+                    <div id="apex-site-current-address" class="apex-site-current-address" hidden></div>
+                    <button id="apex-site-action" class="apex-site-action" type="button"><span>CONTINUAR PARA COMPRA</span><i class="fa-solid fa-arrow-right"></i></button>
+                    <div class="apex-site-detail-foot"><i class="fa-solid fa-shield-halved"></i><span>VEÍCULOS PRESERVADOS<br><b>PAGAMENTO SEGURO PELO BANCO</b></span></div>
+                </aside>
+            </section>
+            <section id="apex-garage-owned-vehicles" class="apex-garage-owned-vehicles" hidden>
+                <div class="apex-garage-listings-heading"><div><small>SUA COLEÇÃO APEX</small><h3>Seus veículos</h3><p>Veículos em sua garagem.</p></div><span id="apex-garage-owned-count">00 VEÍCULOS</span></div>
+                <div id="apex-garage-owned-grid" class="apex-garage-owned-grid"></div>
+            </section>
+            <section id="apex-garage-listings" class="apex-garage-listings" hidden>
+                <div class="apex-garage-listings-heading"><div><small>CATÁLOGO APEX · LOS SANTOS</small><h3 id="apex-garage-listings-title">Garagens disponíveis</h3><p id="apex-garage-listings-copy">Veja fotos, endereço, vagas e valor de cada garagem.</p></div><span id="apex-garage-listings-count">00 LOCAIS</span></div>
+                <div id="apex-garage-listings-grid" class="apex-garage-listings-grid"></div>
+            </section>
+            <footer class="apex-garage-site-footer"><span><kbd>ENTER</kbd> <span id="apex-site-footer-help">VER DETALHES DA GARAGEM</span></span><span>APEX GARAGE NETWORK <b>● ONLINE</b></span><span><kbd>ESC</kbd> FECHAR</span></footer>
+        </main>
+    </div>
+
+    <div id="apex-garage-purchase" class="apex-garage-purchase" aria-hidden="true">
+        <div class="apex-garage-purchase-backdrop"></div>
+        <section class="apex-garage-purchase-panel" role="dialog" aria-modal="true" aria-labelledby="apex-garage-purchase-title">
+            <div class="apex-garage-purchase-content">
+                <div class="apex-garage-purchase-heading">
+                    <span class="apex-garage-purchase-icon"><i class="fa-solid fa-warehouse" aria-hidden="true"></i></span>
+                    <span id="apex-garage-purchase-kicker" class="apex-garage-purchase-kicker">APEX <b>/</b> AQUISIÇÃO DE GARAGEM</span>
+                    <h2 id="apex-garage-purchase-title">GARAGEM DISPONÍVEL</h2>
+                    <p id="apex-garage-purchase-description">Confirme a compra para registrar esta garagem no seu perfil e liberar suas vagas pessoais.</p>
+                </div>
+                <div class="apex-garage-purchase-summary">
+                    <div class="apex-garage-purchase-detail"><small id="apex-garage-purchase-price-label">VALOR</small><strong id="apex-garage-purchase-price">$25.000</strong><span id="apex-garage-purchase-payment">Pagamento direto pelo banco</span></div>
+                    <span class="apex-garage-purchase-plus" aria-hidden="true">+</span>
+                    <div class="apex-garage-purchase-detail is-included"><small>INCLUSO</small><strong id="apex-garage-purchase-included-title">2 VAGAS</strong><span id="apex-garage-purchase-included-description">Expansão disponível depois da compra</span></div>
+                </div>
+            </div>
+            <div class="apex-garage-purchase-actions">
+                <button id="apex-garage-purchase-cancel" type="button">CANCELAR</button>
+                <button id="apex-garage-purchase-confirm" type="button">CONFIRMAR COMPRA</button>
+            </div>
+            <div class="apex-garage-purchase-hints"><span class="apex-purchase-nav"><kbd class="apex-arrow-key" aria-label="Seta para esquerda">←</kbd><kbd class="apex-arrow-key" aria-label="Seta para direita">→</kbd> ESCOLHER</span><span><kbd>ENTER</kbd> CONFIRMAR</span><span><kbd>ESC</kbd> CANCELAR</span></div>
+        </section>
+    </div>
+
+    <div id="radial-menu" class="radial-menu" aria-hidden="true">
+        <div class="radial-menu-backdrop"></div>
+        <div class="scanlines"></div>
+
+        <div class="radial-menu-shell">
+            <div id="radial-menu-items" class="radial-menu-items" aria-label="Menu radial"></div>
+
+            <div id="radial-menu-core" class="radial-menu-core">
+                <span id="radial-menu-kicker" class="radial-menu-kicker">APEX</span>
+                <strong id="radial-menu-title" class="radial-menu-title">RADIAL</strong>
+                <span id="radial-menu-subtitle" class="radial-menu-subtitle">SELECIONE UMA ACAO</span>
+            </div>
+        </div>
+
+        <div class="radial-menu-footer-hints">
+            <span><kbd>MOUSE</kbd> selecionar</span>
+            <span><kbd>CLIQUE</kbd> abrir</span>
+            <span><kbd>CENTRO</kbd> voltar</span>
+            <span><kbd>SOLTE</kbd> fechar</span>
+        </div>
+    </div>
+
+    
+
+    <script src="script.js?v=apex-garage-site-6"></script>
+</body>
+</html>

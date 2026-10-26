@@ -1,0 +1,11 @@
+IMAGENS DO CATÁLOGO DE VEÍCULOS
+
+Coloque cada imagem nesta pasta e use no nome do arquivo o spawn/model do veículo.
+Exemplo: se o spawn for elegyrh8, use elegyrh8.png.
+
+Formatos aceitos: .webp, .png, .jpg, .jpeg e .svg.
+Se houver mais de um formato com o mesmo nome, a ordem de preferência é:
+webp, png, jpg, jpeg e svg.
+
+O nome é tratado sem diferenciar maiúsculas de minúsculas. Se nenhuma imagem for
+encontrada, o catálogo mostra o veículo-placeholder.svg.
