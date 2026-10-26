@@ -43,6 +43,7 @@ const GAUGE_NUM_MAX_SCALE = 1.2
 
 const gaugeClipPath = document.getElementById('gauge-rpm-clip-path')
 const gaugeNumbers = Array.from(document.querySelectorAll('.gauge-numbers .gauge-num'))
+const gaugeLitState = gaugeNumbers.map(() => false)
 
 let gaugeTarget = 0 // RPM alvo (0..1) vindo do jogo
 let gaugeCurrent = 0 // RPM exibido (suavizado)
@@ -78,7 +79,11 @@ function paintGauge(rpm) {
             ? Math.max(0, Math.min(1, value * 2))
             : Math.max(0, Math.min(1, value - (index - 1)))
         node.style.opacity = (GAUGE_NUM_MIN_OPACITY + (1 - GAUGE_NUM_MIN_OPACITY) * t).toFixed(3)
-        node.classList.toggle('is-lit', t >= 0.99)
+        const lit = t >= 0.99
+        if (gaugeLitState[index] !== lit) {
+            gaugeLitState[index] = lit
+            node.classList.toggle('is-lit', lit)
+        }
         node.style.transform = `scale(${(GAUGE_NUM_MIN_SCALE + (GAUGE_NUM_MAX_SCALE - GAUGE_NUM_MIN_SCALE) * t).toFixed(3)})`
     })
 }
@@ -111,6 +116,13 @@ function renderSvgRpm(rpm) {
     if (!gaugeRaf) {
         gaugeRaf = requestAnimationFrame(gaugeLoop)
     }
+}
+
+function setSvgAssist(abs, hbk) {
+    const absEl = document.getElementById('svg-abs')
+    const hbkEl = document.getElementById('svg-hbk')
+    if (absEl) absEl.classList.toggle('is-active', abs === true)
+    if (hbkEl) hbkEl.classList.toggle('is-active', hbk === true)
 }
 
 // Estado inicial: tudo apagado
@@ -1681,6 +1693,7 @@ window.addEventListener('message', (event) => {
     if (!isVisible) {
         renderRpm(0)
         renderSvgRpm(0)
+        setSvgAssist(false, false)
         renderAssist(false, false)
         return
     }
@@ -1712,5 +1725,6 @@ window.addEventListener('message', (event) => {
         }
 
         renderSvgRpm(data.rpm)
+        setSvgAssist(data.abs === true, data.hbk === true)
     }
 });
