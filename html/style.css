@@ -2112,3 +2112,51 @@ kbd {
 #world-interaction-prompt .world-interaction-label { color: #fff; font: italic 700 clamp(11px, .72vw, 14px)/1 'Oswald', 'Arial Narrow', sans-serif; letter-spacing: .025em; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,.55); }
 .apex-garage-listing-photo.is-placeholder { background: linear-gradient(180deg, rgba(15,22,29,.08), rgba(8,12,17,.74)), repeating-linear-gradient(0deg, #52585b 0 9px, #383e42 10px 16px); }
 .apex-garage-listing-photo.is-placeholder::before { content: ''; position: absolute; inset: 0 8% 0 14%; background: linear-gradient(110deg, rgba(198,204,205,.32), transparent 18%), linear-gradient(90deg, transparent 48%, rgba(8,12,17,.34) 49% 51%, transparent 52%); }
+
+
+/* === Velocimetro SVG: tamanho reduzido + ABS/HBK === */
+.svg-speedometer {
+    right: 2.2vw;
+    bottom: 3vh;
+    width: 336px;
+    transform: scale(0.74);
+    transform-origin: right bottom;
+}
+
+.svg-speedometer.is-hidden {
+    opacity: 0;
+    transform: scale(0.74) translateY(10px);
+}
+
+.svg-assist-row {
+    position: absolute;
+    left: 50%;
+    bottom: 3%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 11;
+}
+
+.svg-assist {
+    padding: 2px 6px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .05);
+    color: rgba(255, 255, 255, .3);
+    font-family: var(--font-hud);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .14em;
+}
+
+.svg-assist.abs.is-active {
+    color: #dff8ff;
+    border-color: rgba(125, 211, 252, .95);
+    background: rgba(125, 211, 252, .18);
+}
+
+.svg-assist.hbk.is-active {
+    color: #ffe1df;
+    border-color: rgba(255, 128, 128, .95);
+    background: rgba(255, 105, 105, .18);
+}

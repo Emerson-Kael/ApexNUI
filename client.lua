@@ -1006,9 +1006,8 @@ local function loadHudSettings()
 
     -- A versão nova usa o velocímetro SVG como padrão.
     -- Se o KVP antigo ainda estiver salvo como ApexNUI, migra uma única vez.
-    if decoded.speedometerType == nil or decoded.speedometerType == 'apexnui' then
+    if decoded.speedometerType == nil then
         hudSettings.speedometerType = 'svg'
-        saveHudSettings()
     else
         hudSettings.speedometerType = normalizeSpeedometerType(decoded.speedometerType)
     end
