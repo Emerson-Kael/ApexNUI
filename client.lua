@@ -1463,8 +1463,22 @@ updateSpeedState = function(forceUpdate)
     local gear = 'N'
     local unit = getSpeedUnitLabel(hudSettings.speedUnit)
     local rpm = math.max(0.0, math.min(1.0, tonumber(GetVehicleCurrentRpm(vehicle)) or 0.0))
-    local absActive = speed > 0 and (IsControlPressed(0, 72) or IsDisabledControlPressed(0, 72))
-    local handbrakeActive = IsControlPressed(0, 76) or IsDisabledControlPressed(0, 76)
+    -- ABS = freio (72) acionado em movimento; HBK = freio de mao (76).
+    -- Usa o valor analogico (gatilho L2 do controle) alem da tecla e segura o
+    -- estado aceso por 200 ms para um toque rapido nao passar despercebido.
+    local now = GetGameTimer()
+    local function inputActive(control)
+        return IsControlPressed(0, control) or IsDisabledControlPressed(0, control)
+            or GetControlNormal(0, control) > 0.15 or GetDisabledControlNormal(0, control) > 0.15
+    end
+    if speed > 2 and inputActive(72) then
+        speedState.absUntil = now + 200
+    end
+    if inputActive(76) then
+        speedState.handbrakeUntil = now + 200
+    end
+    local absActive = now < (speedState.absUntil or 0)
+    local handbrakeActive = now < (speedState.handbrakeUntil or 0)
 
     if currentGear <= 0 then
         if velocityY < -0.5 then
@@ -3099,3 +3113,19 @@ CreateThread(function()
         end
     end
 end)
+
+-- Diagnostico do ABS/HBK: /apexnui_debugpedals (liga/desliga) mostra no F8 os valores dos controles
+RegisterCommand('apexnui_debugpedals', function()
+    hintState.debugPedals = not hintState.debugPedals
+    print(('[apexnui] debug pedais: %s'):format(hintState.debugPedals and 'ligado' or 'desligado'))
+    if not hintState.debugPedals then return end
+    CreateThread(function()
+        while hintState.debugPedals do
+            print(('freio(72) normal=%.2f pressed=%s | freio de mao(76) normal=%.2f pressed=%s | acelerar(71) normal=%.2f | modo=%s'):format(
+                GetControlNormal(0, 72), tostring(IsControlPressed(0, 72)),
+                GetControlNormal(0, 76), tostring(IsControlPressed(0, 76)),
+                GetControlNormal(0, 71), tostring(hintState.inputMode)))
+            Wait(500)
+        end
+    end)
+end, false)

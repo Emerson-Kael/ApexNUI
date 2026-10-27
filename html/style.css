@@ -2119,13 +2119,13 @@ kbd {
     right: 2.2vw;
     bottom: 3vh;
     width: 336px;
-    transform: scale(0.74);
+    transform: scale(0.88);
     transform-origin: right bottom;
 }
 
 .svg-speedometer.is-hidden {
     opacity: 0;
-    transform: scale(0.74) translateY(10px);
+    transform: scale(0.88) translateY(10px);
 }
 
 .svg-assist-row {
