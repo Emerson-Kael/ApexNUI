@@ -2160,3 +2160,43 @@ kbd {
     border-color: rgba(255, 128, 128, .95);
     background: rgba(255, 105, 105, .18);
 }
+
+/* === Glifos de entrada (teclado / controle PlayStation) === */
+.input-glyph.is-pad {
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-glyph .pad-icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.35));
+}
+
+.vehicle-quick-number.input-glyph.is-pad {
+    background: transparent;
+}
+
+.vehicle-quick-number.input-glyph .pad-icon {
+    width: 23px;
+    height: 23px;
+}
+
+.vehicle-quick-close kbd.input-glyph.is-pad {
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    background: transparent;
+}
+
+.vehicle-quick-close kbd.input-glyph .pad-icon {
+    width: 22px;
+    height: 22px;
+}
