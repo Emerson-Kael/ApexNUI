@@ -2619,7 +2619,7 @@ RegisterNUICallback('closeVehicleQuickMenu', function(_, cb)
     cb({ ok = true })
 end)
 
-RegisterNUICallback('vehicleQuickMenuAction', function(data, cb)
+vehicleQuickMenuState.runAction = function(data, cb)
     if not vehicleQuickMenuState.open then
         cb({ ok = false })
         return
@@ -2670,7 +2670,9 @@ RegisterNUICallback('vehicleQuickMenuAction', function(data, cb)
 
     closeVehicleQuickMenu()
     cb({ ok = true })
-end)
+end
+
+RegisterNUICallback('vehicleQuickMenuAction', vehicleQuickMenuState.runAction)
 
 RegisterNUICallback('backRadialMenu', function(_, cb)
     backRadialMenu()
@@ -3006,4 +3008,76 @@ end)
 
 RegisterNetEvent('racing:closeLobbyRoom', function()
     SendNUIMessage({ action = 'closeApexLobbyRoom' })
+end)
+
+-- ============================================================
+-- Entrada: teclado x controle (PlayStation)
+-- A NUI troca os glifos (ESC/Z/1-4 -> Options/D-pad/X O [] /\) conforme o modo.
+-- Para forcar manualmente: /apexnui_inputmode auto | teclado | controle
+-- (hintState e usado como tabela de estado para nao criar novos locals)
+-- ============================================================
+hintState.inputOverride = nil
+hintState.inputMode = 'keyboard'
+
+CreateThread(function()
+    local lastSent, lastSentAt = nil, 0
+    while true do
+        local mode = hintState.inputOverride
+        if not mode then
+            -- IsInputDisabled(2) = true enquanto o jogador usa teclado/mouse
+            mode = IsInputDisabled(2) and 'keyboard' or 'gamepad'
+        end
+        hintState.inputMode = mode
+
+        local now = GetGameTimer()
+        if mode ~= lastSent or now - lastSentAt > 5000 then
+            lastSent, lastSentAt = mode, now
+            SendNUIMessage({ action = 'setInputMode', mode = mode })
+        end
+        Wait(250)
+    end
+end)
+
+RegisterCommand('apexnui_inputmode', function(_, args)
+    local value = tostring(args[1] or 'auto'):lower()
+    if value == 'teclado' or value == 'keyboard' then
+        hintState.inputOverride = 'keyboard'
+    elseif value == 'controle' or value == 'gamepad' or value == 'pad' then
+        hintState.inputOverride = 'gamepad'
+    else
+        hintState.inputOverride = nil
+    end
+    print(('[apexnui] modo de entrada: %s'):format(hintState.inputOverride or 'auto'))
+end, false)
+
+-- Atalhos do veiculo no controle: X / Quadrado / Triangulo / Bolinha = 1 / 2 / 3 / 4.
+-- D-pad para baixo (mesmo controle do Z) e Options fecham o menu.
+CreateThread(function()
+    local buttons = {
+        { 201, 'engine' },
+        { 203, 'hazards' },
+        { 204, 'doors' },
+        { 202, 'repair' }
+    }
+
+    while true do
+        if vehicleQuickMenuState.open and hintState.inputMode == 'gamepad' then
+            for i = 1, #buttons do
+                local control = buttons[i][1]
+                if IsControlJustPressed(0, control) or IsDisabledControlJustPressed(0, control) then
+                    vehicleQuickMenuState.runAction({ actionId = buttons[i][2] }, function() end)
+                    break
+                end
+            end
+
+            if vehicleQuickMenuState.open
+                and (IsControlJustPressed(0, 199) or IsDisabledControlJustPressed(0, 199)
+                    or IsControlJustPressed(0, 200) or IsDisabledControlJustPressed(0, 200)) then
+                closeVehicleQuickMenu()
+            end
+            Wait(0)
+        else
+            Wait(150)
+        end
+    end
 end)

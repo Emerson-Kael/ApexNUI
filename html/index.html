@@ -13,11 +13,11 @@
     <div id="world-interaction-prompt" aria-hidden="true"><span class="world-interaction-key"></span><span class="world-interaction-label"></span></div>
     <div id="race-menu-hint" class="race-menu-hint">
         <div class="race-menu-hint-row">
-            <span class="hud-exit-key race-menu-hint-key">ESC</span>
+            <span class="hud-exit-key race-menu-hint-key input-glyph" data-kb="ESC" data-pad="options">ESC</span>
             <span class="hud-exit-text race-menu-hint-text">MENU</span>
         </div>
         <div class="race-menu-hint-row">
-            <span class="hud-exit-key race-menu-hint-key">Z</span>
+            <span class="hud-exit-key race-menu-hint-key input-glyph" data-kb="Z" data-pad="dpad-down">Z</span>
             <span class="hud-exit-text race-menu-hint-text">ATALHOS</span>
         </div>
     </div>
@@ -29,25 +29,25 @@
             </header>
             <div class="vehicle-quick-menu-actions">
                 <button class="vehicle-quick-action" type="button" data-vehicle-action="engine">
-                    <span class="vehicle-quick-number">1</span>
+                    <span class="vehicle-quick-number input-glyph" data-kb="1" data-pad="cross">1</span>
                     <span class="vehicle-quick-icon"><i class="fa-solid fa-power-off" aria-hidden="true"></i></span>
                     <span class="vehicle-quick-label">LIGAR VEÍCULO</span>
                     <span class="vehicle-quick-status" data-vehicle-status="engine"></span>
                 </button>
                 <button class="vehicle-quick-action" type="button" data-vehicle-action="hazards">
-                    <span class="vehicle-quick-number">2</span>
+                    <span class="vehicle-quick-number input-glyph" data-kb="2" data-pad="square">2</span>
                     <span class="vehicle-quick-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span>
                     <span class="vehicle-quick-label">PISCA ALERTA</span>
                     <span class="vehicle-quick-status" data-vehicle-status="hazards"></span>
                 </button>
                 <button class="vehicle-quick-action" type="button" data-vehicle-action="doors">
-                    <span class="vehicle-quick-number">3</span>
+                    <span class="vehicle-quick-number input-glyph" data-kb="3" data-pad="triangle">3</span>
                     <span class="vehicle-quick-icon"><i class="fa-solid fa-car-side" aria-hidden="true"></i></span>
                     <span class="vehicle-quick-label">PORTAS</span>
                     <span class="vehicle-quick-status" data-vehicle-status="doors"></span>
                 </button>
                 <button class="vehicle-quick-action" type="button" data-vehicle-action="repair">
-                    <span class="vehicle-quick-number">4</span>
+                    <span class="vehicle-quick-number input-glyph" data-kb="4" data-pad="circle">4</span>
                     <span class="vehicle-quick-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
                     <span class="vehicle-quick-label">REPARAR VEÍCULO</span>
                     <span class="vehicle-quick-status" data-vehicle-status="repair"></span>
@@ -55,7 +55,7 @@
             </div>
             <footer class="vehicle-quick-menu-footer">
                 <button id="vehicle-quick-menu-close" class="vehicle-quick-close" type="button">
-                    <kbd>Z</kbd><span>FECHAR</span>
+                    <kbd class="input-glyph" data-kb="Z" data-pad="dpad-down">Z</kbd><span>FECHAR</span>
                 </button>
             </footer>
         </div>
