@@ -2200,3 +2200,39 @@ kbd {
     width: 22px;
     height: 22px;
 }
+
+/* === Menu de atalhos do veiculo no controle: navegacao pelas setas === */
+.vehicle-quick-pad-hint {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    color: #fff;
+    font-family: var(--font-title);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+body.input-pad .vehicle-quick-pad-hint {
+    display: inline-flex;
+}
+
+body.input-pad .vehicle-quick-menu-footer {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    min-width: 0;
+}
+
+.vehicle-quick-pad-hint .input-glyph .pad-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.vehicle-quick-action.is-selected:not(:disabled) {
+    background: linear-gradient(90deg, rgba(122, 128, 138, 0.95), rgba(84, 88, 97, 0.88));
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* No controle o icone de confirmar (X) so aparece na linha selecionada */
+body.input-pad .vehicle-quick-action:not(.is-selected) .vehicle-quick-number {
+    visibility: hidden;
+}

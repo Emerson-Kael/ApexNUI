@@ -1836,3 +1836,13 @@ window.addEventListener('message', (event) => {
 })
 
 renderInputGlyphs()
+
+/* Menu de atalhos do veiculo no controle: linha selecionada (enviada pelo client.lua) */
+window.addEventListener('message', (event) => {
+    const data = event.data
+    if (!data || data.action !== 'vehicleQuickMenuSelect') return
+    const index = Number(data.index) || 1
+    vehicleQuickActionButtons.forEach((button, i) => {
+        button.classList.toggle('is-selected', i + 1 === index)
+    })
+})
