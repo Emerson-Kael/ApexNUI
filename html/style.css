@@ -2203,70 +2203,70 @@ kbd {
 
 /* === Menu de atalhos do veiculo: tamanho maior (ajuste aqui) === */
 .vehicle-quick-menu {
-    width: min(372px, 46vw);
+    width: min(318px, 44vw);
 }
 
 .vehicle-quick-menu-header {
-    min-height: 34px;
-    padding: 2px 14px 6px;
+    min-height: 30px;
+    padding: 2px 12px 5px;
 }
 
 .vehicle-quick-menu-header strong {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .vehicle-quick-action {
-    min-height: 46px;
-    gap: 10px;
-    padding: 4px 12px;
+    min-height: 38px;
+    gap: 8px;
+    padding: 3px 10px;
 }
 
 .vehicle-quick-number,
 .vehicle-quick-icon {
-    flex: 0 0 34px;
-    width: 34px;
-    height: 34px;
-    border-radius: 7px;
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
 }
 
 .vehicle-quick-number {
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .vehicle-quick-icon {
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .vehicle-quick-label {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .vehicle-quick-status {
-    font-size: 11px;
+    font-size: 9px;
 }
 
 .vehicle-quick-number.input-glyph .pad-icon {
-    width: 34px;
-    height: 34px;
+    width: 28px;
+    height: 28px;
 }
 
 .vehicle-quick-menu-footer {
-    min-height: 46px;
-    padding: 5px 12px;
-    gap: 10px;
+    min-height: 38px;
+    padding: 4px 10px;
+    gap: 8px;
 }
 
 .vehicle-quick-close {
-    gap: 10px;
-    font-size: 16px;
+    gap: 8px;
+    font-size: 14px;
 }
 
 .vehicle-quick-close kbd.input-glyph .pad-icon {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
 }
 
 .race-menu-hint-key.input-glyph.is-pad .pad-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
 }
