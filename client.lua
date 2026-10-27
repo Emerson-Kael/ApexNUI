@@ -2776,7 +2776,15 @@ end)
 
 CreateThread(function()
     while true do
-        local fixedZPressed = IsControlJustPressed(0, 20) or IsDisabledControlJustPressed(0, 20)
+        -- Teclado: Z. Controle: seta da direita (a seta para baixo agora navega no menu).
+        local usingKeyboard = hintState.inputOverride == 'keyboard'
+            or (hintState.inputOverride == nil and IsInputDisabled(2))
+        local fixedZPressed
+        if usingKeyboard then
+            fixedZPressed = IsControlJustPressed(0, 20) or IsDisabledControlJustPressed(0, 20)
+        else
+            fixedZPressed = IsControlJustPressed(0, 175) or IsDisabledControlJustPressed(0, 175)
+        end
         if fixedZPressed then
             if vehicleQuickMenuState.open then
                 closeVehicleQuickMenu()
@@ -3050,33 +3058,43 @@ RegisterCommand('apexnui_inputmode', function(_, args)
     print(('[apexnui] modo de entrada: %s'):format(hintState.inputOverride or 'auto'))
 end, false)
 
--- Atalhos do veiculo no controle: X / Quadrado / Triangulo / Bolinha = 1 / 2 / 3 / 4.
--- D-pad para baixo (mesmo controle do Z) e Options fecham o menu.
+-- Atalhos do veiculo no controle: setas (cima/baixo) navegam, X confirma,
+-- Bolinha/Options fecham (a seta da direita tambem fecha, igual ao Z do teclado).
 CreateThread(function()
-    local buttons = {
-        { 201, 'engine' },
-        { 203, 'hazards' },
-        { 204, 'doors' },
-        { 202, 'repair' }
-    }
+    local actions = { 'engine', 'hazards', 'doors', 'repair' }
+    local index = 1
+    local wasOpen = false
+
+    local function pressed(control)
+        return IsControlJustPressed(0, control) or IsDisabledControlJustPressed(0, control)
+    end
+
+    local function sendIndex()
+        SendNUIMessage({ action = 'vehicleQuickMenuSelect', index = index })
+    end
 
     while true do
         if vehicleQuickMenuState.open and hintState.inputMode == 'gamepad' then
-            for i = 1, #buttons do
-                local control = buttons[i][1]
-                if IsControlJustPressed(0, control) or IsDisabledControlJustPressed(0, control) then
-                    vehicleQuickMenuState.runAction({ actionId = buttons[i][2] }, function() end)
-                    break
-                end
+            if not wasOpen then
+                wasOpen = true
+                index = 1
+                sendIndex()
             end
 
-            if vehicleQuickMenuState.open
-                and (IsControlJustPressed(0, 199) or IsDisabledControlJustPressed(0, 199)
-                    or IsControlJustPressed(0, 200) or IsDisabledControlJustPressed(0, 200)) then
+            if pressed(172) then -- seta para cima
+                index = index > 1 and index - 1 or #actions
+                sendIndex()
+            elseif pressed(173) then -- seta para baixo
+                index = index < #actions and index + 1 or 1
+                sendIndex()
+            elseif pressed(201) then -- X
+                vehicleQuickMenuState.runAction({ actionId = actions[index] }, function() end)
+            elseif pressed(202) or pressed(199) or pressed(200) then -- Bolinha / Options
                 closeVehicleQuickMenu()
             end
             Wait(0)
         else
+            wasOpen = false
             Wait(150)
         end
     end
