@@ -2790,14 +2790,15 @@ end)
 
 CreateThread(function()
     while true do
-        -- Teclado: Z. Controle: seta da direita (a seta para baixo agora navega no menu).
+        -- Teclado: Z (abre/fecha). Controle: seta para a esquerda abre; Bolinha fecha.
         local usingKeyboard = hintState.inputOverride == 'keyboard'
             or (hintState.inputOverride == nil and IsInputDisabled(2))
         local fixedZPressed
         if usingKeyboard then
             fixedZPressed = IsControlJustPressed(0, 20) or IsDisabledControlJustPressed(0, 20)
         else
-            fixedZPressed = IsControlJustPressed(0, 175) or IsDisabledControlJustPressed(0, 175)
+            fixedZPressed = not vehicleQuickMenuState.open
+                and (IsControlJustPressed(0, 174) or IsDisabledControlJustPressed(0, 174))
         end
         if fixedZPressed then
             if vehicleQuickMenuState.open then
@@ -3072,37 +3073,28 @@ RegisterCommand('apexnui_inputmode', function(_, args)
     print(('[apexnui] modo de entrada: %s'):format(hintState.inputOverride or 'auto'))
 end, false)
 
--- Atalhos do veiculo no controle: setas (cima/baixo) navegam, X confirma,
--- Bolinha/Options fecham (a seta da direita tambem fecha, igual ao Z do teclado).
+-- Atalhos do veiculo no controle (menu aberto com a seta da esquerda):
+-- esquerda = ligar/desligar, baixo = pisca alerta, direita = portas, cima = reparar.
+-- Bolinha (ou Options) fecha.
 CreateThread(function()
-    local actions = { 'engine', 'hazards', 'doors', 'repair' }
-    local index = 1
-    local wasOpen = false
-
     local function pressed(control)
         return IsControlJustPressed(0, control) or IsDisabledControlJustPressed(0, control)
     end
 
-    local function sendIndex()
-        SendNUIMessage({ action = 'vehicleQuickMenuSelect', index = index })
-    end
-
+    local wasOpen = false
     while true do
         if vehicleQuickMenuState.open and hintState.inputMode == 'gamepad' then
             if not wasOpen then
+                -- o mesmo toque que abriu o menu nao pode acionar uma opcao
                 wasOpen = true
-                index = 1
-                sendIndex()
-            end
-
-            if pressed(172) then -- seta para cima
-                index = index > 1 and index - 1 or #actions
-                sendIndex()
-            elseif pressed(173) then -- seta para baixo
-                index = index < #actions and index + 1 or 1
-                sendIndex()
-            elseif pressed(201) then -- X
-                vehicleQuickMenuState.runAction({ actionId = actions[index] }, function() end)
+            elseif pressed(174) then -- seta esquerda
+                vehicleQuickMenuState.runAction({ actionId = 'engine' }, function() end)
+            elseif pressed(173) then -- seta baixo
+                vehicleQuickMenuState.runAction({ actionId = 'hazards' }, function() end)
+            elseif pressed(175) then -- seta direita
+                vehicleQuickMenuState.runAction({ actionId = 'doors' }, function() end)
+            elseif pressed(172) then -- seta cima
+                vehicleQuickMenuState.runAction({ actionId = 'repair' }, function() end)
             elseif pressed(202) or pressed(199) or pressed(200) then -- Bolinha / Options
                 closeVehicleQuickMenu()
             end
