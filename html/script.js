@@ -1759,9 +1759,11 @@ function padDpad(direction) {
         right: 'M15 9.5h6.5v5H15z'
     }
     const cross = 'M9.5 2.5h5v7h7v5h-7v7h-5v-7h-7v-5h7z'
-    const lit = direction && arms[direction] ? `<path d="${arms[direction]}" fill="#ffffff"/>` : ''
+    const lit = direction && arms[direction]
+    const stroke = lit ? 'rgba(233,235,240,.42)' : '#e9ebf0'
+    const arm = lit ? `<path d="${arms[direction]}" fill="#ffffff" stroke="#ffffff" stroke-width="1.3" stroke-linejoin="round"/>` : ''
     return padSvg(
-        `<path d="${cross}" fill="rgba(18,20,26,.82)" stroke="#e9ebf0" stroke-width="1.3" stroke-linejoin="round"/>${lit}`
+        `<path d="${cross}" fill="rgba(18,20,26,.82)" stroke="${stroke}" stroke-width="1.3" stroke-linejoin="round"/>${arm}`
     )
 }
 
@@ -1836,13 +1838,3 @@ window.addEventListener('message', (event) => {
 })
 
 renderInputGlyphs()
-
-/* Menu de atalhos do veiculo no controle: linha selecionada (enviada pelo client.lua) */
-window.addEventListener('message', (event) => {
-    const data = event.data
-    if (!data || data.action !== 'vehicleQuickMenuSelect') return
-    const index = Number(data.index) || 1
-    vehicleQuickActionButtons.forEach((button, i) => {
-        button.classList.toggle('is-selected', i + 1 === index)
-    })
-})
