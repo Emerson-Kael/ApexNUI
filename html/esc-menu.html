@@ -7,6 +7,7 @@
   <link rel="preload" as="image" href="esc-menu-images/crew-garage.webp">
   <link rel="stylesheet" href="esc-menu-redesign.css?v=player-economy-1">
   <link rel="stylesheet" href="garage-cards.css?v=garage-cards-2">
+  <link rel="stylesheet" href="input-glyphs.css?v=input-glyphs-1">
 </head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 100 6 3 3 0 000-6z"/></symbol>
@@ -212,7 +213,7 @@
       <button class="btn" id="mapConfirmYes" type="button">Abrir mapa</button>
       <button class="btn g" id="mapConfirmNo" type="button">Cancelar</button>
     </div>
-    <div class="confirm-hints"><span><kbd class="ft-key">←</kbd><kbd class="ft-key">→</kbd> ESCOLHER</span><span><kbd class="ft-key">ENTER</kbd> CONFIRMAR</span><span><kbd class="ft-key">ESC</kbd> CANCELAR</span></div>
+    <div class="confirm-hints"><span><kbd data-input="nav-horizontal">←→</kbd> ESCOLHER</span><span><kbd data-input="confirm">ENTER</kbd> CONFIRMAR</span><span><kbd data-input="back">ESC</kbd> CANCELAR</span></div>
   </div>
 </div>
 <div class="vehicle-confirm" id="garageConfirm" aria-hidden="true">
@@ -234,11 +235,12 @@
       <button class="vehicle-confirm-cancel" id="garageConfirmCancel" type="button">CANCELAR</button>
       <button class="vehicle-confirm-accept" id="garageConfirmAccept" type="button">CONFIRMAR</button>
     </div>
-    <div class="confirm-hints"><span><kbd class="ft-key">←</kbd><kbd class="ft-key">→</kbd> ESCOLHER</span><span><kbd class="ft-key">ENTER</kbd> CONFIRMAR</span><span><kbd class="ft-key">ESC</kbd> CANCELAR</span></div>
+    <div class="confirm-hints"><span><kbd data-input="nav-horizontal">←→</kbd> ESCOLHER</span><span><kbd data-input="confirm">ENTER</kbd> CONFIRMAR</span><span><kbd data-input="back">ESC</kbd> CANCELAR</span></div>
   </div>
 </div>
 <div class="toast" id="ts"></div>
-<div class="ft"><div class="ft-default"><span class="ft-hint"><span class="ft-key ft-arrow-key">←</span><span class="ft-key ft-arrow-key">→</span><span class="ft-pad-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Navegar</span><span class="ft-hint"><span class="ft-key">↵</span>Selecionar</span><span class="ft-hint ft-close-hint"><span class="ft-key">ESC</span>Fechar menu</span></div><div class="config-ft"><span class="ft-hint"><span class="ft-pad-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Navegar</span><span class="ft-hint"><span class="ft-pad-icon adjust" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Ajustar</span><span class="ft-hint"><span class="ft-key">↵</span>Alterar</span><span class="ft-hint"><span class="ft-key">←</span>Voltar</span><span class="ft-hint ft-config-escape"><span class="ft-key">ESC</span>Voltar</span><span class="ft-hint ft-gta-hint"><span class="ft-key">DEL</span>Configuração do GTA</span></div></div>
+<div class="ft"><div class="ft-default"><span class="ft-hint"><span data-input="nav-horizontal">←→</span>Navegar</span><span class="ft-hint"><span data-input="confirm">↵</span>Selecionar</span><span class="ft-hint ft-close-hint"><span data-input="back">ESC</span>Fechar menu</span></div><div class="config-ft"><span class="ft-hint"><span data-input="nav-vertical">↑↓</span>Navegar</span><span class="ft-hint"><span data-input="nav-horizontal">←→</span>Ajustar</span><span class="ft-hint"><span data-input="confirm">↵</span>Alterar</span><span class="ft-hint"><span data-key="arrow_left" data-pad="dpad-left">←</span>Voltar</span><span class="ft-hint ft-config-escape"><span data-input="back">ESC</span>Voltar</span><span class="ft-hint ft-gta-hint"><span data-key="delete">DEL</span>Configuração do GTA</span></div></div>
 </div></div>
+  <script src="input-glyphs.js?v=input-glyphs-1"></script>
   <script src="esc-menu.js?v=garage-cards-2"></script>
 </body></html>
