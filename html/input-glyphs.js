@@ -36,12 +36,12 @@
         'stick-l': { playstation: 'playstation_stick_l', xbox: 'xbox_stick_l' },
         'stick-r': { playstation: 'playstation_stick_r', xbox: 'xbox_stick_r' },
         dpad: { playstation: 'playstation_dpad', xbox: 'xbox_dpad' },
-        'dpad-up': { playstation: 'playstation_dpad_up', xbox: 'xbox_dpad_up' },
-        'dpad-down': { playstation: 'playstation_dpad_down', xbox: 'xbox_dpad_down' },
-        'dpad-left': { playstation: 'playstation_dpad_left', xbox: 'xbox_dpad_left' },
-        'dpad-right': { playstation: 'playstation_dpad_right', xbox: 'xbox_dpad_right' },
-        'dpad-horizontal': { playstation: 'playstation_dpad_horizontal', xbox: 'xbox_dpad_horizontal' },
-        'dpad-vertical': { playstation: 'playstation_dpad_vertical', xbox: 'xbox_dpad_vertical' }
+        'dpad-up': { playstation: 'playstation_dpad_up_outline', xbox: 'xbox_dpad_up_outline' },
+        'dpad-down': { playstation: 'playstation_dpad_down_outline', xbox: 'xbox_dpad_down_outline' },
+        'dpad-left': { playstation: 'playstation_dpad_left_outline', xbox: 'xbox_dpad_left_outline' },
+        'dpad-right': { playstation: 'playstation_dpad_right_outline', xbox: 'xbox_dpad_right_outline' },
+        'dpad-horizontal': { playstation: 'playstation_dpad_horizontal_outline', xbox: 'xbox_dpad_horizontal_outline' },
+        'dpad-vertical': { playstation: 'playstation_dpad_vertical_outline', xbox: 'xbox_dpad_vertical_outline' }
     }
 
     // Acoes prontas: {key: tecla do teclado, pad: botao generico do controle}
@@ -70,6 +70,13 @@
 
     const state = { mode: 'keyboard', padStyle: 'playstation' }
 
+    // <body data-input-force="keyboard"> trava a pagina no teclado (ex.: menu ESC enquanto
+    // a navegacao por controle nao existe). Remova o atributo para voltar ao automatico.
+    function effectiveMode() {
+        const forced = document.body && document.body.dataset.inputForce
+        return forced === 'keyboard' || forced === 'gamepad' ? forced : state.mode
+    }
+
     function normKey(key) {
         const raw = String(key == null ? '' : key).trim().toLowerCase()
         if (KEY_ALIASES[raw]) return KEY_ALIASES[raw]
@@ -83,7 +90,7 @@
 
     // Caminho do icone para o estado atual (ou null se nao existir mapeamento)
     function iconSrc(key, pad) {
-        if (state.mode === 'gamepad') {
+        if (effectiveMode() === 'gamepad') {
             const entry = PAD[pad]
             const family = state.padStyle === 'xbox' ? 'xbox' : 'playstation'
             if (!entry) return null
@@ -94,7 +101,7 @@
     }
 
     function stateKey() {
-        return `${state.mode}:${state.padStyle}`
+        return `${effectiveMode()}:${state.padStyle}`
     }
 
     function renderOne(el) {
@@ -106,7 +113,7 @@
 
         if (!src) {
             el.classList.remove('has-icon')
-            el.textContent = state.mode === 'gamepad' ? '' : (el.dataset.glyphText || key.toUpperCase())
+            el.textContent = effectiveMode() === 'gamepad' ? '' : (el.dataset.glyphText || key.toUpperCase())
             return
         }
 
@@ -145,7 +152,7 @@
         if (nextMode === state.mode && nextStyle === state.padStyle) return
         state.mode = nextMode
         state.padStyle = nextStyle
-        document.body && document.body.classList.toggle('input-pad', nextMode === 'gamepad')
+        document.body && document.body.classList.toggle('input-pad', effectiveMode() === 'gamepad')
         render()
         syncFrames()
         window.dispatchEvent(new CustomEvent('apex-input-change', { detail: { mode: state.mode, padStyle: state.padStyle } }))
@@ -164,7 +171,7 @@
     })
 
     function init() {
-        document.body.classList.toggle('input-pad', state.mode === 'gamepad')
+        document.body.classList.toggle('input-pad', effectiveMode() === 'gamepad')
         render()
 
         // Conteudo criado depois (listas, modais, etc.) tambem recebe os icones.
