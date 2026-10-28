@@ -38,6 +38,9 @@ Tamanho: defina `--input-icon-size` no elemento ou no container (use **px**, nã
 
 Páginas dentro de iframe (como o menu ESC) pedem o modo ao documento pai sozinhas.
 
+Para travar uma página no teclado (o menu ESC está assim enquanto a navegação por controle não existe), use
+`<body data-input-force="keyboard">`; remova o atributo quando o controle passar a funcionar nela.
+
 ## Ações prontas (`data-input`)
 
 | Ação | Teclado | Controle (genérico) | PlayStation / Xbox |
@@ -79,6 +82,10 @@ O `client.lua` envia `{ action = 'setInputMode', mode = 'keyboard' | 'gamepad', 
 
 ## Observações
 
-- Foram incluídos só os ícones sem contorno (`_outline` ficou de fora para o download dos jogadores ficar menor).
-  Se precisar de um, copie do pacote original para a mesma pasta.
+- **Tudo em preto e branco** (padrão Apex): ícones coloridos do pacote (`button_color_*`, setas do teclado com vermelho,
+  D-pad com realce vermelho) foram removidos de propósito. Não adicione variantes coloridas.
+  Teclas compostas usam `+` (ex.: `data-key="arrow_left+arrow_right"`).
+
+- Foram incluídos só os ícones sem contorno, mais as setas direcionais `_outline` (cruz preta e branca, com a direção
+  acionada em branco cheio). Se precisar de outro `_outline`, copie do pacote original para a mesma pasta.
 - Novos ícones precisam estar listados no `fxmanifest.lua` (`html/input-icons/**/*.svg` já cobre a pasta).

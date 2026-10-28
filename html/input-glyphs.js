@@ -21,10 +21,10 @@
 
     // Botao generico do controle -> arquivo em cada pacote (sem .svg)
     const PAD = {
-        'face-bottom': { playstation: 'playstation_button_color_cross', xbox: 'xbox_button_color_a' },
-        'face-right': { playstation: 'playstation_button_color_circle', xbox: 'xbox_button_color_b' },
-        'face-left': { playstation: 'playstation_button_color_square', xbox: 'xbox_button_color_x' },
-        'face-top': { playstation: 'playstation_button_color_triangle', xbox: 'xbox_button_color_y' },
+        'face-bottom': { playstation: 'playstation_button_cross', xbox: 'xbox_button_a' },
+        'face-right': { playstation: 'playstation_button_circle', xbox: 'xbox_button_b' },
+        'face-left': { playstation: 'playstation_button_square', xbox: 'xbox_button_x' },
+        'face-top': { playstation: 'playstation_button_triangle', xbox: 'xbox_button_y' },
         options: { playstation: 'playstation4_button_options', xbox: 'xbox_button_menu' },
         share: { playstation: 'playstation4_button_share', xbox: 'xbox_button_view' },
         l1: { playstation: 'playstation_trigger_l1', xbox: 'xbox_lb' },
@@ -36,12 +36,12 @@
         'stick-l': { playstation: 'playstation_stick_l', xbox: 'xbox_stick_l' },
         'stick-r': { playstation: 'playstation_stick_r', xbox: 'xbox_stick_r' },
         dpad: { playstation: 'playstation_dpad', xbox: 'xbox_dpad' },
-        'dpad-up': { playstation: 'playstation_dpad_up', xbox: 'xbox_dpad_up' },
-        'dpad-down': { playstation: 'playstation_dpad_down', xbox: 'xbox_dpad_down' },
-        'dpad-left': { playstation: 'playstation_dpad_left', xbox: 'xbox_dpad_left' },
-        'dpad-right': { playstation: 'playstation_dpad_right', xbox: 'xbox_dpad_right' },
-        'dpad-horizontal': { playstation: 'playstation_dpad_horizontal', xbox: 'xbox_dpad_horizontal' },
-        'dpad-vertical': { playstation: 'playstation_dpad_vertical', xbox: 'xbox_dpad_vertical' }
+        'dpad-up': { playstation: 'playstation_dpad_up_outline', xbox: 'xbox_dpad_up_outline' },
+        'dpad-down': { playstation: 'playstation_dpad_down_outline', xbox: 'xbox_dpad_down_outline' },
+        'dpad-left': { playstation: 'playstation_dpad_left_outline', xbox: 'xbox_dpad_left_outline' },
+        'dpad-right': { playstation: 'playstation_dpad_right_outline', xbox: 'xbox_dpad_right_outline' },
+        'dpad-horizontal': { playstation: 'playstation_dpad_horizontal_outline', xbox: 'xbox_dpad_horizontal_outline' },
+        'dpad-vertical': { playstation: 'playstation_dpad_vertical_outline', xbox: 'xbox_dpad_vertical_outline' }
     }
 
     // Acoes prontas: {key: tecla do teclado, pad: botao generico do controle}
@@ -55,8 +55,8 @@
         'nav-down': { key: 'arrow_down', pad: 'dpad-down' },
         'nav-left': { key: 'arrow_left', pad: 'dpad-left' },
         'nav-right': { key: 'arrow_right', pad: 'dpad-right' },
-        'nav-horizontal': { key: 'arrows_horizontal', pad: 'dpad-horizontal' },
-        'nav-vertical': { key: 'arrows_vertical', pad: 'dpad-vertical' },
+        'nav-horizontal': { key: 'arrow_left+arrow_right', pad: 'dpad-horizontal' },
+        'nav-vertical': { key: 'arrow_up+arrow_down', pad: 'dpad-vertical' },
         'tab-prev': { key: 'q', pad: 'l1' },
         'tab-next': { key: 'e', pad: 'r1' }
     }
@@ -70,6 +70,13 @@
 
     const state = { mode: 'keyboard', padStyle: 'playstation' }
 
+    // <body data-input-force="keyboard"> trava a pagina no teclado (ex.: menu ESC enquanto
+    // a navegacao por controle nao existe). Remova o atributo para voltar ao automatico.
+    function effectiveMode() {
+        const forced = document.body && document.body.dataset.inputForce
+        return forced === 'keyboard' || forced === 'gamepad' ? forced : state.mode
+    }
+
     function normKey(key) {
         const raw = String(key == null ? '' : key).trim().toLowerCase()
         if (KEY_ALIASES[raw]) return KEY_ALIASES[raw]
@@ -81,46 +88,51 @@
         return { key: el.dataset.key || preset.key || '', pad: el.dataset.pad || preset.pad || '' }
     }
 
-    // Caminho do icone para o estado atual (ou null se nao existir mapeamento)
-    function iconSrc(key, pad) {
-        if (state.mode === 'gamepad') {
+    // Caminhos dos icones para o estado atual (lista vazia = sem mapeamento).
+    // No teclado, "arrow_left+arrow_right" gera duas teclas lado a lado.
+    function iconSources(key, pad) {
+        if (effectiveMode() === 'gamepad') {
             const entry = PAD[pad]
             const family = state.padStyle === 'xbox' ? 'xbox' : 'playstation'
-            if (!entry) return null
-            return `${ICON_ROOT}/${family === 'xbox' ? 'xbox' : 'ps'}/${entry[family]}.svg`
+            if (!entry) return []
+            return [`${ICON_ROOT}/${family === 'xbox' ? 'xbox' : 'ps'}/${entry[family]}.svg`]
         }
-        const name = normKey(key)
-        return name ? `${ICON_ROOT}/kb/keyboard_${name}.svg` : null
+        return String(key || '').split('+').map(normKey).filter(Boolean)
+            .map((name) => `${ICON_ROOT}/kb/keyboard_${name}.svg`)
     }
 
     function stateKey() {
-        return `${state.mode}:${state.padStyle}`
+        return `${effectiveMode()}:${state.padStyle}`
     }
 
     function renderOne(el) {
         if (el.dataset.glyphText === undefined) el.dataset.glyphText = el.textContent.trim()
         el.classList.add('input-glyph')
         const { key, pad } = describe(el)
-        const src = iconSrc(key, pad)
+        const sources = iconSources(key, pad)
         el.dataset.glyphState = stateKey()
 
-        if (!src) {
+        if (!sources.length) {
             el.classList.remove('has-icon')
-            el.textContent = state.mode === 'gamepad' ? '' : (el.dataset.glyphText || key.toUpperCase())
+            el.textContent = effectiveMode() === 'gamepad' ? '' : (el.dataset.glyphText || key.toUpperCase())
             return
         }
 
-        const img = document.createElement('img')
-        img.className = 'input-icon'
-        img.alt = el.dataset.glyphText || key || pad
-        img.draggable = false
-        img.addEventListener('error', () => {
+        const fallback = () => {
             el.classList.remove('has-icon')
             el.textContent = el.dataset.glyphText || key.toUpperCase()
-        }, { once: true })
-        img.src = src
+        }
+        const imgs = sources.map((src) => {
+            const img = document.createElement('img')
+            img.className = 'input-icon'
+            img.alt = el.dataset.glyphText || key || pad
+            img.draggable = false
+            img.addEventListener('error', fallback, { once: true })
+            img.src = src
+            return img
+        })
         el.classList.add('has-icon')
-        el.replaceChildren(img)
+        el.replaceChildren(...imgs)
     }
 
     function render(root) {
@@ -145,7 +157,7 @@
         if (nextMode === state.mode && nextStyle === state.padStyle) return
         state.mode = nextMode
         state.padStyle = nextStyle
-        document.body && document.body.classList.toggle('input-pad', nextMode === 'gamepad')
+        document.body && document.body.classList.toggle('input-pad', effectiveMode() === 'gamepad')
         render()
         syncFrames()
         window.dispatchEvent(new CustomEvent('apex-input-change', { detail: { mode: state.mode, padStyle: state.padStyle } }))
@@ -164,7 +176,7 @@
     })
 
     function init() {
-        document.body.classList.toggle('input-pad', state.mode === 'gamepad')
+        document.body.classList.toggle('input-pad', effectiveMode() === 'gamepad')
         render()
 
         // Conteudo criado depois (listas, modais, etc.) tambem recebe os icones.
