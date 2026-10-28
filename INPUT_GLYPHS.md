@@ -82,6 +82,10 @@ O `client.lua` envia `{ action = 'setInputMode', mode = 'keyboard' | 'gamepad', 
 
 ## Observações
 
+- **Tudo em preto e branco** (padrão Apex): ícones coloridos do pacote (`button_color_*`, setas do teclado com vermelho,
+  D-pad com realce vermelho) foram removidos de propósito. Não adicione variantes coloridas.
+  Teclas compostas usam `+` (ex.: `data-key="arrow_left+arrow_right"`).
+
 - Foram incluídos só os ícones sem contorno, mais as setas direcionais `_outline` (cruz preta e branca, com a direção
   acionada em branco cheio). Se precisar de outro `_outline`, copie do pacote original para a mesma pasta.
 - Novos ícones precisam estar listados no `fxmanifest.lua` (`html/input-icons/**/*.svg` já cobre a pasta).
