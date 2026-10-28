@@ -3037,10 +3037,12 @@ end)
 -- Entrada: teclado x controle (PlayStation)
 -- A NUI troca os glifos (ESC/Z/1-4 -> Options/D-pad/X O [] /\) conforme o modo.
 -- Para forcar manualmente: /apexnui_inputmode auto | teclado | controle
+-- Estilo dos icones do controle (salvo): /apexnui_padstyle playstation | xbox
 -- (hintState e usado como tabela de estado para nao criar novos locals)
 -- ============================================================
 hintState.inputOverride = nil
 hintState.inputMode = 'keyboard'
+hintState.padStyle = GetResourceKvpString('apexnui:padStyle') == 'xbox' and 'xbox' or 'playstation'
 
 CreateThread(function()
     local lastSent, lastSentAt = nil, 0
@@ -3053,9 +3055,10 @@ CreateThread(function()
         hintState.inputMode = mode
 
         local now = GetGameTimer()
-        if mode ~= lastSent or now - lastSentAt > 5000 then
-            lastSent, lastSentAt = mode, now
-            SendNUIMessage({ action = 'setInputMode', mode = mode })
+        local signature = mode .. ':' .. hintState.padStyle
+        if signature ~= lastSent or now - lastSentAt > 5000 then
+            lastSent, lastSentAt = signature, now
+            SendNUIMessage({ action = 'setInputMode', mode = mode, padStyle = hintState.padStyle })
         end
         Wait(250)
     end
@@ -3071,6 +3074,20 @@ RegisterCommand('apexnui_inputmode', function(_, args)
         hintState.inputOverride = nil
     end
     print(('[apexnui] modo de entrada: %s'):format(hintState.inputOverride or 'auto'))
+end, false)
+
+RegisterCommand('apexnui_padstyle', function(_, args)
+    local value = tostring(args[1] or ''):lower()
+    if value == 'xbox' then
+        hintState.padStyle = 'xbox'
+    elseif value == 'playstation' or value == 'ps' or value == 'ps5' or value == 'ps4' then
+        hintState.padStyle = 'playstation'
+    else
+        print('[apexnui] uso: /apexnui_padstyle playstation | xbox')
+        return
+    end
+    SetResourceKvp('apexnui:padStyle', hintState.padStyle)
+    print(('[apexnui] icones do controle: %s'):format(hintState.padStyle))
 end, false)
 
 -- Atalhos do veiculo no controle (menu aberto com a seta da esquerda):
